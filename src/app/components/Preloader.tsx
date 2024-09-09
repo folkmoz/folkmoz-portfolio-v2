@@ -36,7 +36,7 @@ export default function Preloader({
 
   useGSAP(
     () => {
-      if (!container.current) return;
+      if (!container.current || !nonhowkRef.current) return;
 
       const isMobile = dimension.width < 768;
 
@@ -73,7 +73,7 @@ export default function Preloader({
               });
 
               // get the x and y position of the nonhowk in the viewport
-              const rect = non.getBoundingClientRect();
+              const rect = non.getBoundingClientRect() as DOMRect;
               const x = rect.left + rect.width / 3 + 120;
               const y = rect.top + rect.height / 3 - 180;
 
@@ -130,15 +130,15 @@ export default function Preloader({
   );
 
   return (
-    <div ref={container} className="fixed inset-0 z-50 min-h-screen">
+    <div ref={container} className="fixed inset-0 z-50 min-h-screen bg-black">
       {dimension.width > 0 && (
         <>
           <div
             ref={balloonRef}
-            className="absolute z-10 rounded-2xl bg-white p-4 font-body text-2xl opacity-0"
+            className="absolute z-10 rounded-2xl bg-white p-4 font-body text-2xl font-bold opacity-0"
           >
-            Hello There! 👋🏼
-            <div className="absolute left-[-3%] top-[60%] h-0 w-0 rotate-[30deg] transform border-l-[2vh] border-r-[2vh] border-t-[6vh] border-l-transparent border-r-transparent border-t-white"></div>
+            Hi There! 👋🏼
+            <div className="absolute left-[-3%] top-[75%] h-0 w-0 rotate-[30deg] transform border-l-[2vh] border-r-[2vh] border-t-[6vh] border-l-transparent border-r-transparent border-t-white"></div>
           </div>
           <Image
             ref={nonhowkRef}

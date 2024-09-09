@@ -39,8 +39,8 @@ export default function Cursor() {
     // xTo.current(e.clientX + (isTarget ? 0 : 10));
     // yTo.current(e.clientY + (isTarget ? 0 : 20));
 
-    xTo.current(e.clientX);
-    yTo.current(e.clientY);
+    xTo.current(e.clientX + 15);
+    yTo.current(e.clientY + 20);
 
     gsap.to(cursor.current, {
       // mixBlendMode: isTarget ? "normal" : "difference",
@@ -92,15 +92,9 @@ export default function Cursor() {
   return (
     <div
       ref={cursor}
-      className="opacity-1 pointer-events-none fixed left-0 top-0 z-[9999] flex -translate-x-1/2 -translate-y-1/2 transform items-center justify-center rounded-full"
+      className="opacity-1 pointer-events-none fixed left-0 top-0 z-[9999] flex size-[70px] -translate-x-1/2 -translate-y-1/2 transform items-center justify-center rounded-full"
     >
-      <Image
-        src="/images/non-cursor.svg"
-        alt="mouse"
-        width={70}
-        height={70}
-        priority
-      />
+      <Image src="/images/non-cursor.svg" alt="mouse" fill priority />
     </div>
   );
 }

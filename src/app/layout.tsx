@@ -5,24 +5,31 @@ import { Rubik_Doodle_Shadow } from "next/font/google";
 import localFont from "next/font/local";
 import { DATA } from "@/data/resume";
 import { cn } from "@/lib/utils";
+import TailwindcssIndicator from "./components/TailwindcssIndicator";
+
+const fontBody = localFont({
+  src: [
+    {
+      path: "./fonts/Satoshi-Bold.otf",
+      weight: "bold",
+    },
+    {
+      path: "./fonts/Satoshi-Regular.otf",
+      weight: "normal",
+    },
+    {
+      path: "./fonts/Satoshi-Medium.otf",
+      weight: "500",
+    },
+  ],
+  variable: "--font-body",
+});
 
 const font = Rubik_Doodle_Shadow({
   weight: ["400"],
   subsets: ["latin"],
   display: "swap",
   variable: "--font-heading",
-});
-
-const fontHeading = localFont({
-  src: "./fonts/Bileha.otf",
-  weight: "normal",
-  variable: "--font-heading",
-});
-
-const fontBody = localFont({
-  src: "./fonts/Avenis.otf",
-  variable: "--font-body",
-  weight: "normal",
 });
 
 export const metadata: Metadata = {
@@ -38,9 +45,14 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={cn("bg-black antialiased", font.variable, fontBody.variable)}
+        className={cn(
+          "bg-[#f5f8fa] antialiased",
+          font.variable,
+          fontBody.variable,
+        )}
       >
         {children}
+        <TailwindcssIndicator />
       </body>
     </html>
   );
