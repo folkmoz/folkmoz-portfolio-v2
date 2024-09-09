@@ -88,7 +88,7 @@ export default function Hero({ isFinishLoading = false }) {
             fill="none"
             d="M6,150C49.63,93,105.79,36.65,156.2,47.55,207.89,58.74,213,131.91,264,150c40.67,14.43,108.57-6.91,229-145"
           />
-          <text ref={textPath1} x="300" className="text-5xl lg:text-3xl">
+          <text ref={textPath1} x="-100" className="text-5xl lg:text-3xl">
             <textPath xlinkHref="#curve" className="fill-red-800 font-heading">
               FOLKMOZ — FOLKMOZ — FOLKMOZ — FOLKMOZ — FOLKMOZ — FOLKMOZ —
             </textPath>
@@ -104,7 +104,7 @@ export default function Hero({ isFinishLoading = false }) {
             fill="none"
             d="M6,150C49.63,93,105.79,36.65,156.2,47.55,207.89,58.74,213,131.91,264,150c40.67,14.43,108.57-6.91,229-145"
           />
-          <text ref={textPath2} x="-900" className="text-5xl lg:text-3xl">
+          <text ref={textPath2} x="-400" className="text-5xl lg:text-3xl">
             <textPath
               xlinkHref="#curve2"
               className="fill-[#217396] font-heading"
@@ -164,10 +164,8 @@ export default function Hero({ isFinishLoading = false }) {
 }
 const ScrollIndicator = () => {
   const svgRef = useRef(null);
-  const xTo = useRef<gsap.QuickToFunc>();
-  const yTo = useRef<gsap.QuickToFunc>();
 
-  const { contextSafe } = useGSAP(
+  useGSAP(
     () => {
       gsap.to(svgRef.current, {
         rotation: 360,
@@ -176,32 +174,9 @@ const ScrollIndicator = () => {
         ease: "linear",
         transformOrigin: "center center",
       });
-
-      xTo.current = gsap.quickTo(svgRef.current, "x", {
-        duration: 0.3,
-        ease: "power3.out",
-      });
-      yTo.current = gsap.quickTo(svgRef.current, "y", {
-        duration: 0.3,
-        ease: "power3.out",
-      });
     },
     { scope: svgRef },
   );
-
-  const moveCursor = contextSafe((e: MouseEvent) => {
-    if (!xTo.current || !yTo.current) return;
-
-    xTo.current(e.clientX + 15);
-    yTo.current(e.clientY + 20);
-  });
-
-  useEffect(() => {
-    // document.addEventListener("mousemove", moveCursor);
-    return () => {
-      // document.removeEventListener("mousemove", moveCursor);
-    };
-  }, []);
 
   return (
     <svg

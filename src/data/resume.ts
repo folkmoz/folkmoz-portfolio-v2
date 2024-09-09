@@ -24,7 +24,7 @@ export const DATA = {
         description:
           "A platform for finding a room or dormitory near the university.",
         url: "https://roommatch.vercel.app",
-        image: "/images/projects/roommatch.jpeg",
+        image: "/images/projects/roommatch.png",
         stacks: [
           "Next.js",
           "Typescript",
@@ -40,7 +40,7 @@ export const DATA = {
         description:
           "A chatbot that uses Google Gemini as a backend to generate responses.",
         url: "https://ai.folkmoz.me",
-        image: "/images/projects/aichat.jpeg",
+        image: "/images/projects/aichat.png",
         stacks: [
           "Next.js",
           "Typescript",
@@ -54,8 +54,8 @@ export const DATA = {
         title: "TalkTrek",
         description:
           "A web board for discussing, I tried to recreate the look of Pantip. (for educational purposes only)",
-        url: "https://ai.folkmoz.me",
-        image: "/images/projects/aichat.jpeg",
+        url: "#",
+        image: "/images/projects/talktrek.png",
         stacks: [
           "Next.js",
           "Typescript",
@@ -68,11 +68,11 @@ export const DATA = {
         ],
       },
       {
-        title: "Where in the world?",
+        title: "Search countries",
         description:
           "A website that shows the countries of the world and their details. (course project)",
-        url: "https://ai.folkmoz.me",
-        image: "/images/projects/aichat.jpeg",
+        url: "https://search-countries-folkmoz.vercel.app/",
+        image: "/images/projects/searchcountries.png",
         stacks: [
           "Next.js",
           "Typescript",

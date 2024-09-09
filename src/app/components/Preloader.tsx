@@ -11,7 +11,7 @@ export default function Preloader({
 }) {
   const container = useRef(null);
   const pathRef = useRef(null);
-  const nonhowkRef = useRef(null);
+  const nonhowkRef = useRef<HTMLImageElement>(null);
   const balloonRef = useRef(null);
 
   const [dimension, setDimension] = useState({
