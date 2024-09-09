@@ -3,7 +3,7 @@ import Link from "next/link";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 
-const sections = ["home", "project", "about me", "contact"];
+const sections = ["home", "about me", "project", "contact"];
 
 export default function StickyHeader() {
   const headerRef = React.useRef<HTMLDivElement>(null);

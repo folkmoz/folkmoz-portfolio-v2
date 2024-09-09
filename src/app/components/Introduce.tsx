@@ -1,20 +1,50 @@
+import Image from "next/image";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 import { splitLetters } from "../helpers/splitText";
 import { DATA } from "@/data/resume";
 import AnimatedButton from "./AnimatedButton";
+import SectionDescribe from "./SectionDescribe";
 
 export default function Introduce() {
   const container = useRef(null);
   const intro = useRef(null);
+  const profileRef = useRef<HTMLDivElement | null>(null);
 
   useGSAP(
     () => {
+      const profileImage = profileRef.current!.querySelector("img");
+      // Profile animation
+      gsap
+        .timeline({
+          scrollTrigger: {
+            trigger: profileImage,
+            start: "top bottom",
+            end: "bottom 70%",
+            toggleActions: "play none none none",
+            once: true,
+            scrub: 1,
+          },
+        })
+        .fromTo(
+          profileImage,
+          {
+            scale: 1.5,
+            clipPath: "inset(0% 0% 100% 0%)",
+          },
+          {
+            scale: 1,
+            clipPath: "inset(0% 0% 0% 0%)",
+            ease: "power4.inOut",
+            duration: 1,
+          },
+        );
+
       gsap.to(container.current, {
         scale: 1,
-        borderTopLeftRadius: "0",
-        borderTopRightRadius: "0",
+        borderTopLeftRadius: "12px",
+        borderTopRightRadius: "12px",
         scrollTrigger: {
           trigger: container.current,
           start: "top bottom",
@@ -30,6 +60,8 @@ export default function Introduce() {
 
         gsap.to(letters, {
           opacity: 1,
+          fontStyle: "normal",
+          fontWeight: "700",
           stagger: 0.1,
           ease: "none",
           scrollTrigger: {
@@ -51,29 +83,37 @@ export default function Introduce() {
       id="introduce"
       ref={container}
       style={{ scale: 0.95 }}
-      className="relative flex min-h-screen flex-col rounded-t-[2rem] bg-foreground pb-[20vh]"
+      className="relative flex min-h-screen flex-col rounded-t-[2rem] bg-foreground pb-[40vh]"
     >
-      <div className="mx-auto mt-[300px] w-full px-10 py-16 md:px-16 lg:px-32">
+      <div className="mx-auto w-full px-10 py-16 pt-[300px] md:px-16 lg:px-32">
         <div
           ref={intro}
-          className="font-body text-[5vw] font-bold text-white xl:text-[80px]"
+          className="font-body text-[5vw] text-white xl:text-[80px]"
         >
           {DATA.description.split("\n").map((line, index) => (
             <div key={index} className="line lg:-mb-4">
-              {splitLetters(line, "opacity-20")}
+              {splitLetters(line, "opacity-20 ")}
             </div>
           ))}
         </div>
+        <SectionDescribe title="about me" />
 
-        <div className="relative mb-12 mt-20 flex justify-end text-white lg:mb-20 lg:mt-48">
-          <div className="font-body text-2xl font-bold italic text-white/80 xl:text-5xl">
-            about me
+        <div className="mt-60 grid w-full grid-cols-5 items-end justify-items-start">
+          <div
+            ref={profileRef}
+            className="relative col-span-2 w-full overflow-hidden rounded-[16px] shadow-xl"
+          >
+            <Image
+              src="/images/me.jpg"
+              alt={`${DATA.initials}'s avatar`}
+              width={700}
+              height={700}
+              quality={100}
+              priority
+              className="w-full max-w-full"
+            />
           </div>
-          <div className="absolute -bottom-4 left-0 h-1 w-full bg-white/60"></div>
-        </div>
-
-        <div className="flex w-full grid-cols-3 justify-end">
-          <div className="col-span-full ml-20 flex flex-col justify-center text-[5vw] italic text-white/40 md:col-start-2 md:grid-cols-1 md:text-3xl lg:ml-20 lg:space-y-4 lg:text-4xl xl:ml-[16rem] xl:text-5xl">
+          <div className="col-span-full flex flex-col justify-center text-[5vw] italic text-white/40 md:text-3xl lg:col-span-3 lg:ml-20 lg:space-y-4 lg:text-4xl xl:text-5xl">
             <p>
               I&apos;m <span className="text-[#D98841]">Folk</span>, from
               Thailand
