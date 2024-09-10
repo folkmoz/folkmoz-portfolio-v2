@@ -92,7 +92,7 @@ export default function Project({
     <>
       <section
         id="project"
-        className="relative min-h-screen overflow-hidden bg-foreground px-16 pb-[100vh]"
+        className="relative min-h-screen overflow-hidden bg-foreground px-16 pb-[20vh]"
       >
         <SectionDescribe title="selected projects" />
 
@@ -126,16 +126,19 @@ export default function Project({
             </div>
           </div>
 
-          <div ref={imagesRef} className="absolute inset-0 w-full">
+          <div
+            ref={imagesRef}
+            data-cursor="project"
+            className="absolute inset-0 w-full"
+          >
             {DATA.projects.fullDev.map((project, index) => (
               <div
-                data-cursor="project"
                 key={project.title + index + "project"}
                 style={{
                   zIndex: -index,
                   scale: 0.9,
                 }}
-                className="absolute top-1/2 aspect-video w-full -translate-y-1/2 cursor-pointer overflow-hidden rounded-[16px] before:pointer-events-none before:absolute before:inset-0 before:z-[1] before:bg-black/60"
+                className="absolute top-1/2 block aspect-video w-full -translate-y-1/2 cursor-pointer overflow-hidden rounded-[1rem] before:pointer-events-none before:absolute before:inset-0 before:z-[1] before:bg-black/60"
               >
                 <Image
                   src={project.image}

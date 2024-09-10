@@ -33,19 +33,17 @@ export default function Cursor() {
 
     const isLink = (e.target as HTMLElement).matches("a, button");
     //check if target has a parent with a data-cursor attribute
-    const isTarget =
+    const isProject =
       (e.target as HTMLElement).closest("[data-cursor=project]") !== null;
-    if (isTarget) setText("Visit");
-    else setText("Click");
 
-    if (isLink) {
-      setHoverOn("link");
-    } else if (isTarget) {
-      setHoverOn("project");
-      gsap.to(cursorProject.current, {
+    if (isLink || isProject) {
+      setIsHovering(true);
+      setHoverOn(isProject ? "project" : null);
+      gsap.to(cursor.current, {
         scale: 1,
         opacity: 1,
-        duration: 0.5,
+        duration: 0.3,
+        ease: "power3.out",
       });
     }
 
@@ -59,22 +57,10 @@ export default function Cursor() {
       // mixBlendMode: isTarget ? "normal" : "difference",
       // width: isTarget ? 120 : 20,
       // height: isTarget ? 120 : 20,
-      rotate: e.movementX < 0 ? -10 : 20,
+      // rotate: e.movementX < 0 ? -10 : 20,
       // duration: 0.4,
       ease: "power1",
     });
-
-    if (tooltip.current) {
-      gsap.to(tooltip.current, {
-        opacity: isTarget ? 1 : 0,
-        duration: 0.8,
-      });
-    }
-
-    if (isTarget) setIsHovering(true);
-    else {
-      setIsHovering(false);
-    }
   });
 
   const moveOutOfScreen = contextSafe(() => {
@@ -104,6 +90,7 @@ export default function Cursor() {
     };
   }, []);
 
+  useEffect(() => {}, [isHovering, hoverOn]);
   return (
     <div
       ref={cursor}
@@ -116,7 +103,7 @@ export default function Cursor() {
           width="200"
           height="200"
           viewBox="0 0 200 200"
-          className="duration-[10s] animate-spin-slow absolute scale-0 overflow-visible opacity-0"
+          className="duration-[10s] absolute scale-0 animate-spin-slow overflow-visible opacity-0"
         >
           <defs>
             <path

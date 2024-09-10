@@ -12,6 +12,7 @@ import Project from "./components/Project";
 import Cursor from "./components/Cursor";
 import { cn } from "@/lib/utils";
 import Introduce from "./components/Introduce";
+import AboutMe from "./components/AboutMe";
 
 const Preloader = dynamic(() => import("./components/Preloader"), {
   ssr: false,
@@ -21,7 +22,7 @@ gsap.registerPlugin(useGSAP);
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Page() {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const ref = useRef(null);
 
   return (
@@ -42,6 +43,7 @@ export default function Page() {
       <Hero isFinishLoading={!isLoading} />
       <Introduce />
       <Project isFinishLoading={!isLoading} />
+      <AboutMe />
       <section className="relative grid h-screen w-full place-items-center bg-white">
         <h1 className="font-body text-5xl">
           <span className="text-8xl">Contacts section is here!</span>

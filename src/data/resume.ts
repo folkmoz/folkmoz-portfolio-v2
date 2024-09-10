@@ -1,5 +1,16 @@
 export const DATA = {
   name: "folkmoz",
+  personal: {
+    bod: new Date("2002-05-19"),
+    email: "jiran.folk@gmail.com",
+    phone: "+6697-347-7811",
+    location: "Pathum Thani, Thailand",
+    socials: {
+      ig: "folk_moz",
+      linkedin: "jiran-folk",
+      github: "https://www.github.com/folkmoz",
+    },
+  },
   initials: "JK",
   url: "https://folkmoz.me",
   description:
