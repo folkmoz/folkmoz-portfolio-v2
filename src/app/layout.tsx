@@ -25,12 +25,26 @@ const fontBody = localFont({
   variable: "--font-body",
 });
 
-const font = Rubik_Doodle_Shadow({
-  weight: ["400"],
-  subsets: ["latin"],
-  display: "swap",
+const fontHeading = localFont({
+  src: [
+    {
+      path: "./fonts/Alpino-Bold.otf",
+      weight: "bold",
+    },
+    {
+      path: "./fonts/Alpino-Regular.otf",
+      weight: "normal",
+    },
+  ],
   variable: "--font-heading",
 });
+
+// const font = Rubik_Doodle_Shadow({
+//   weight: ["400"],
+//   subsets: ["latin"],
+//   display: "swap",
+//   variable: "--font-heading",
+// });
 
 export const metadata: Metadata = {
   title: `${DATA.name} - Portfolio`,
@@ -47,7 +61,7 @@ export default function RootLayout({
       <body
         className={cn(
           "bg-[#f5f8fa] antialiased",
-          font.variable,
+          fontHeading.variable,
           fontBody.variable,
         )}
       >

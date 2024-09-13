@@ -101,10 +101,7 @@ export default function Project({
           className="relative grid min-h-screen place-items-center"
         >
           <div className="pointer-events-none absolute inset-0 z-[1] grid items-end justify-items-end px-16">
-            <div
-              ref={titleRef}
-              className={"relative w-full text-white " + font.variable}
-            >
+            <div ref={titleRef} className={"relative w-full text-white"}>
               {DATA.projects.fullDev.map((project, index) => (
                 <div
                   key={project.title + index}
@@ -116,7 +113,7 @@ export default function Project({
                     transform: `translateY(${index * 100}vh)`,
                   }}
                   className={cn(
-                    "origin-bottom-right text-right font-body",
+                    "origin-bottom-right text-right font-body font-bold",
                     project.title.length > 10 ? "text-[8vw]" : "text-[10vw]",
                   )}
                 >

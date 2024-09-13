@@ -1,0 +1,36 @@
+import { useEffect, useState } from "react";
+
+export default function useScreen() {
+  const [screen, setScreen] = useState({
+    width: 0,
+    height: 0,
+  });
+
+  const [scrollY, setScrollY] = useState(0);
+
+  const isMobile = screen.width < 768;
+
+  const handleResize = () => {
+    setScreen({
+      width: window.innerWidth,
+      height: window.innerHeight,
+    });
+  };
+
+  const handleScroll = () => {
+    setScrollY(window.scrollY);
+  };
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("resize", handleResize);
+
+    handleResize();
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  return { screen, isMobile, scrollY };
+}

@@ -30,7 +30,7 @@ export default function SectionDescribe({ title }: { title: string }) {
   }, [titleRef, lineRef]);
 
   return (
-    <div className="relative mb-12 mt-20 flex justify-end text-white lg:mb-20 lg:mt-48">
+    <div className="relative mb-12 mt-20 flex w-full justify-end text-white lg:mb-20 lg:mt-36">
       <div className="w-full overflow-hidden text-right font-body text-2xl font-bold italic text-white/80 md:text-4xl xl:text-5xl">
         <div ref={titleRef} className="pr-1 leading-normal">
           {title}

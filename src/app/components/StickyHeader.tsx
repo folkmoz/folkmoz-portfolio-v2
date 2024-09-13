@@ -34,11 +34,11 @@ export default function StickyHeader() {
   }, []);
 
   return (
-    <div ref={headerRef} className="fixed left-0 right-0 top-0 z-10 h-[150px]">
+    <div ref={headerRef} className="fixed left-0 right-0 top-0 z-20 h-[150px]">
       <header className="flex h-full w-full items-center justify-between px-12 py-4">
         <div className="absolute inset-0 blur-lg"></div>
-        <div className="relative flex h-full w-full items-center justify-between">
-          <Link href="/" className="font-heading text-xl">
+        <div className="relative flex h-full w-full items-center justify-end">
+          <Link href="/" className="top-13 fixed left-12 font-heading text-xl">
             <svg
               className="size-12"
               width="95"
@@ -58,7 +58,9 @@ export default function StickyHeader() {
           <div className="flex font-body font-bold">
             {sections.map((section) => (
               <Link key={section + "-link"} href={`#${section}`}>
-                <div className="px-4 py-2 text-2xl xl:text-2xl">{section}</div>
+                <div className="px-4 py-2 text-2xl mix-blend-difference xl:text-2xl">
+                  {section}
+                </div>
               </Link>
             ))}
           </div>

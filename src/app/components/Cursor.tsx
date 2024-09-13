@@ -7,12 +7,10 @@ import React, { useRef, useState, useEffect } from "react";
 export default function Cursor() {
   const [isHovering, setIsHovering] = useState(false);
   const [hoverOn, setHoverOn] = useState<string | null>(null);
-  const [text, setText] = useState("Click");
   const xTo = useRef<gsap.QuickToFunc>();
   const yTo = useRef<gsap.QuickToFunc>();
   const cursor = useRef<HTMLDivElement | null>(null);
   const cursorProject = useRef<SVGSVGElement | null>(null);
-  const tooltip = useRef<HTMLSpanElement | null>(null);
 
   const { contextSafe } = useGSAP(
     () => {
@@ -31,49 +29,35 @@ export default function Cursor() {
   const moveCursor = contextSafe((e: MouseEvent) => {
     if (!xTo.current || !yTo.current) return;
 
-    const isLink = (e.target as HTMLElement).matches("a, button");
+    const isTarget = (e.target as HTMLElement).matches("a, button");
     //check if target has a parent with a data-cursor attribute
-    const isProject =
-      (e.target as HTMLElement).closest("[data-cursor=project]") !== null;
 
-    if (isLink || isProject) {
-      setIsHovering(true);
-      setHoverOn(isProject ? "project" : null);
-      gsap.to(cursor.current, {
-        scale: 1,
-        opacity: 1,
-        duration: 0.3,
-        ease: "power3.out",
-      });
-    }
-
-    // xTo.current(e.clientX + (isTarget ? 0 : 10));
-    // yTo.current(e.clientY + (isTarget ? 0 : 20));
-
-    xTo.current(e.clientX);
     yTo.current(e.clientY);
+    xTo.current(e.clientX);
 
-    gsap.to(cursor.current, {
-      // mixBlendMode: isTarget ? "normal" : "difference",
-      // width: isTarget ? 120 : 20,
-      // height: isTarget ? 120 : 20,
-      // rotate: e.movementX < 0 ? -10 : 20,
-      // duration: 0.4,
-      ease: "power1",
-    });
+    if (isTarget) {
+      setIsHovering(true);
+
+      const target = (e.target as HTMLElement).closest("[data-cursor]");
+
+      if (target) {
+        setHoverOn(target.getAttribute("data-cursor"));
+      } else {
+        setHoverOn(null);
+      }
+    } else {
+      setIsHovering(false);
+      setHoverOn(null);
+    }
   });
 
   const moveOutOfScreen = contextSafe(() => {
-    if (!xTo.current || !yTo.current) return;
-
     gsap.to(cursor.current, {
       opacity: 0,
     });
   });
 
   const moveIntoScreen = contextSafe(() => {
-    if (!xTo.current || !yTo.current) return;
-
     gsap.to(cursor.current, {
       opacity: 1,
     });
@@ -90,11 +74,10 @@ export default function Cursor() {
     };
   }, []);
 
-  useEffect(() => {}, [isHovering, hoverOn]);
   return (
     <div
       ref={cursor}
-      className="opacity-1 pointer-events-none fixed left-0 top-0 z-[9999] flex size-[70px] -translate-x-1/2 -translate-y-1/2 transform items-center justify-center rounded-full"
+      className="opacity-1 pointer-events-none fixed left-0 top-0 z-[9999] hidden size-[70px] -translate-x-1/2 -translate-y-1/2 transform items-center justify-center rounded-full lg:flex"
     >
       <Image src="/images/non-cursor.svg" alt="mouse" fill priority />
       {isHovering && hoverOn === "project" && (
@@ -103,7 +86,7 @@ export default function Cursor() {
           width="200"
           height="200"
           viewBox="0 0 200 200"
-          className="duration-[10s] absolute scale-0 animate-spin-slow overflow-visible opacity-0"
+          className="absolute scale-0 animate-spin-slow overflow-visible opacity-0"
         >
           <defs>
             <path

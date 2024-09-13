@@ -5,14 +5,18 @@ import { Suspense, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/all";
+import { cn } from "@/lib/utils";
 
 import Hero from "./components/Hero";
 import StickyHeader from "./components/StickyHeader";
 import Project from "./components/Project";
 import Cursor from "./components/Cursor";
-import { cn } from "@/lib/utils";
 import Introduce from "./components/Introduce";
 import AboutMe from "./components/AboutMe";
+import NoiseFilterSVG from "@/app/components/NoiseFilterSVG";
+import useScreen from "@/app/hooks/useScreen";
+import HeroTest from "@/app/components/HeroTest";
+import Contact from "@/app/components/Contact";
 
 const Preloader = dynamic(() => import("./components/Preloader"), {
   ssr: false,
@@ -22,7 +26,7 @@ gsap.registerPlugin(useGSAP);
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Page() {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const ref = useRef(null);
 
   return (
@@ -40,26 +44,14 @@ export default function Page() {
       )}
       <StickyHeader />
 
-      <Hero isFinishLoading={!isLoading} />
+      {/*<Hero isFinishLoading={!isLoading} />*/}
+      <HeroTest />
       <Introduce />
       <Project isFinishLoading={!isLoading} />
       <AboutMe />
-      <section className="relative grid h-screen w-full place-items-center bg-white">
-        <h1 className="font-body text-5xl">
-          <span className="text-8xl">Contacts section is here!</span>
-        </h1>
-      </section>
+      <Contact />
 
-      {/* <div className="absolute -right-60 top-[40vh] rotate-12">
-          <Image
-            src="/images/monster.png"
-            alt="Monster"
-            width={700}
-            height={700}
-            quality={100}
-            priority
-          />
-        </div> */}
+      <NoiseFilterSVG />
     </main>
   );
 }

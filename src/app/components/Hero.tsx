@@ -3,6 +3,7 @@
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import { useRef, useEffect } from "react";
+import { ScrollIndicator } from "@/app/components/ScrollIndicator";
 
 export default function Hero({ isFinishLoading = false }) {
   const container = useRef(null);
@@ -13,29 +14,30 @@ export default function Hero({ isFinishLoading = false }) {
 
   useGSAP(
     () => {
-      gsap.to([textPath1.current, textPath3.current], {
-        attr: {
-          x: -900,
-        },
-        ease: "power3.inOut",
-        scrollTrigger: {
-          trigger: container.current,
-          start: "top top",
-          end: "bottom top",
-          scrub: true,
-        },
-      });
+      // gsap.to([textPath1.current, textPath3.current], {
+      //   attr: {
+      //     x: -900,
+      //   },
+      //   ease: "power3.inOut",
+      //   scrollTrigger: {
+      //     trigger: container.current,
+      //     start: "top top",
+      //     end: "bottom top",
+      //     scrub: true,
+      //   },
+      // });
 
       gsap.to(textPath2.current, {
         attr: {
-          x: 900,
+          x: 100,
         },
+        opacity: 0,
         ease: "power3.inOut",
         scrollTrigger: {
           trigger: container.current,
-          start: "top top",
+          start: "bottom bottom",
           end: "bottom top",
-          scrub: true,
+          scrub: 1,
         },
       });
 
@@ -77,27 +79,27 @@ export default function Hero({ isFinishLoading = false }) {
       <section
         id="hero"
         ref={container}
-        className="sticky top-0 grid min-h-screen place-items-center bg-[#f5f8fa] text-white"
+        className="sticky top-0 grid min-h-[calc(100vh-150px)] place-items-center bg-[#f5f8fa] text-white"
       >
-        <svg
-          viewBox="0 0 425 300"
-          className="absolute top-[30vh] lg:top-[50px]"
-        >
-          <path
-            id="curve"
-            fill="none"
-            d="M6,150C49.63,93,105.79,36.65,156.2,47.55,207.89,58.74,213,131.91,264,150c40.67,14.43,108.57-6.91,229-145"
-          />
-          <text ref={textPath1} x="-100" className="text-5xl lg:text-3xl">
-            <textPath xlinkHref="#curve" className="fill-red-800 font-heading">
-              FOLKMOZ — FOLKMOZ — FOLKMOZ — FOLKMOZ — FOLKMOZ — FOLKMOZ —
-            </textPath>
-          </text>
-        </svg>
+        {/*<svg*/}
+        {/*  viewBox="0 0 425 300"*/}
+        {/*  className="absolute top-[30vh] lg:top-[50px]"*/}
+        {/*>*/}
+        {/*  <path*/}
+        {/*    id="curve"*/}
+        {/*    fill="none"*/}
+        {/*    d="M6,150C49.63,93,105.79,36.65,156.2,47.55,207.89,58.74,213,131.91,264,150c40.67,14.43,108.57-6.91,229-145"*/}
+        {/*  />*/}
+        {/*  <text ref={textPath1} x="-100" className="text-5xl lg:text-3xl">*/}
+        {/*    <textPath xlinkHref="#curve" className="fill-red-800 font-heading">*/}
+        {/*      FOLKMOZ — FOLKMOZ — FOLKMOZ — FOLKMOZ — FOLKMOZ — FOLKMOZ —*/}
+        {/*    </textPath>*/}
+        {/*  </text>*/}
+        {/*</svg>*/}
 
         <svg
           viewBox="0 0 425 300"
-          className="absolute -left-14 top-[30vh] lg:top-[150px]"
+          className="absolute -left-14 top-[30vh] lg:top-[0px]"
         >
           <path
             id="curve2"
@@ -107,28 +109,28 @@ export default function Hero({ isFinishLoading = false }) {
           <text ref={textPath2} x="-400" className="text-5xl lg:text-3xl">
             <textPath
               xlinkHref="#curve2"
-              className="fill-[#217396] font-heading"
+              className="fill-foreground font-heading"
             >
               FOLKMOZ — FOLKMOZ — FOLKMOZ — FOLKMOZ — FOLKMOZ — FOLKMOZ —
             </textPath>
           </text>
         </svg>
 
-        <svg
-          viewBox="0 0 425 300"
-          className="absolute -left-40 top-[30vh] lg:top-[200px]"
-        >
-          <path
-            id="curve2"
-            fill="none"
-            d="M6,150C49.63,93,105.79,36.65,156.2,47.55,207.89,58.74,213,131.91,264,150c40.67,14.43,108.57-6.91,229-145"
-          />
-          <text ref={textPath3} x="100" className="text-5xl lg:text-3xl">
-            <textPath xlinkHref="#curve2" className="fill-[#444] font-heading">
-              FOLKMOZ — FOLKMOZ — FOLKMOZ — FOLKMOZ — FOLKMOZ — FOLKMOZ —
-            </textPath>
-          </text>
-        </svg>
+        {/*<svg*/}
+        {/*  viewBox="0 0 425 300"*/}
+        {/*  className="absolute -left-40 top-[30vh] lg:top-[200px]"*/}
+        {/*>*/}
+        {/*  <path*/}
+        {/*    id="curve2"*/}
+        {/*    fill="none"*/}
+        {/*    d="M6,150C49.63,93,105.79,36.65,156.2,47.55,207.89,58.74,213,131.91,264,150c40.67,14.43,108.57-6.91,229-145"*/}
+        {/*  />*/}
+        {/*  <text ref={textPath3} x="100" className="text-5xl lg:text-3xl">*/}
+        {/*    <textPath xlinkHref="#curve2" className="fill-[#444] font-heading">*/}
+        {/*      FOLKMOZ — FOLKMOZ — FOLKMOZ — FOLKMOZ — FOLKMOZ — FOLKMOZ —*/}
+        {/*    </textPath>*/}
+        {/*  </text>*/}
+        {/*</svg>*/}
 
         {/* <div>
           <div className="flex flex-col items-center text-black">
@@ -162,44 +164,3 @@ export default function Hero({ isFinishLoading = false }) {
     </>
   );
 }
-const ScrollIndicator = () => {
-  const svgRef = useRef(null);
-
-  useGSAP(
-    () => {
-      gsap.to(svgRef.current, {
-        rotation: 360,
-        repeat: -1,
-        duration: 10,
-        ease: "linear",
-        transformOrigin: "center center",
-      });
-    },
-    { scope: svgRef },
-  );
-
-  return (
-    <svg
-      ref={svgRef}
-      width="200"
-      height="200"
-      viewBox="0 0 200 200"
-      className="relative overflow-visible"
-    >
-      <defs>
-        <path
-          id="circlePath"
-          d="M 100, 100
-               m -75, 0
-               a 75,75 0 1,1 150,0
-               a 75,75 0 1,1 -150,0"
-        />
-      </defs>
-      <text className="font-body text-black">
-        <textPath href="#circlePath" className="fill-current">
-          SCROLL SCROLL SCROLL SCROLL SCROLL SCROLL SCROLL SCROLL
-        </textPath>
-      </text>
-    </svg>
-  );
-};
