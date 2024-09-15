@@ -63,7 +63,7 @@ export default function HeroTest() {
         <div className="flex h-full w-full flex-col items-center justify-center">
           <div
             ref={titleWrapperRef}
-            className="select-none space-x-2 font-heading text-[16vw] font-bold"
+            className="select-none space-x-2 font-heading text-[16vw] font-bold leading-none"
           >
             {"FOLKMOZ".split("").map((letter, index) => (
               <span key={index} className="strokeme inline-block">
@@ -72,7 +72,7 @@ export default function HeroTest() {
             ))}
           </div>
           <div>
-            <p className="font-body text-3xl">
+            <p className="font-body text-xl lg:text-3xl">
               Curious developer, Hard worker, Sleepless
             </p>
           </div>

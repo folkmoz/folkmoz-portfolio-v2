@@ -3,10 +3,13 @@ import { useGSAP } from "@gsap/react";
 import { useRef } from "react";
 import { splitLetters } from "../helpers/splitText";
 import { DATA } from "@/data/resume";
+import useScreen from "@/app/hooks/useScreen";
 
 export default function Introduce() {
   const container = useRef<HTMLDivElement | null>(null);
   const intro = useRef<HTMLDivElement | null>(null);
+
+  const { isMobile } = useScreen();
 
   useGSAP(
     () => {
@@ -31,20 +34,23 @@ export default function Introduce() {
       });
 
       // Scale container animation
-      gsap.to(container.current, {
-        scale: 1,
-        borderTopLeftRadius: "12px",
-        borderTopRightRadius: "12px",
-        scrollTrigger: {
-          trigger: container.current,
-          start: "top bottom",
-          end: "top 20%",
-          scrub: 1,
-        },
-      });
+      if (!isMobile) {
+        gsap.to(container.current, {
+          scale: 1,
+          borderTopLeftRadius: "12px",
+          borderTopRightRadius: "12px",
+          scrollTrigger: {
+            trigger: container.current,
+            start: "top bottom",
+            end: "top 20%",
+            scrub: 1,
+          },
+        });
+      }
     },
     {
       scope: container,
+      dependencies: [isMobile],
     },
   );
 
@@ -52,16 +58,15 @@ export default function Introduce() {
     <section
       id="introduce"
       ref={container}
-      style={{ scale: 0.95 }}
-      className="relative flex min-h-screen flex-col rounded-t-[2rem] bg-foreground pb-[20vh]"
+      className="relative -mb-1 flex h-[50svh] flex-col rounded-t-[2rem] bg-foreground md:min-h-screen md:scale-[0.95] md:pb-[20vh]"
     >
-      <div className="mx-auto w-full px-10 py-16 pt-[300px] md:px-16 lg:px-32">
+      <div className="mx-auto w-full px-4 py-16 pt-[200px] md:px-16 md:pt-[300px] lg:px-32">
         <div
           ref={intro}
-          className="font-body text-[5vw] text-white xl:text-[80px]"
+          className="font-body text-3xl text-white md:text-6xl lg:text-7xl xl:text-[80px]"
         >
           {DATA.description.split("\n").map((line, index) => (
-            <div key={index} className="line lg:-mb-4">
+            <div key={index} className="line lg:mb-2 xl:mb-4">
               {splitLetters(line, "opacity-20 ")}
             </div>
           ))}

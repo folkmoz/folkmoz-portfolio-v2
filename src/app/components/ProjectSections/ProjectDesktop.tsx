@@ -6,7 +6,7 @@ import { ScrollTrigger } from "gsap/all";
 import { DATA } from "@/data/resume";
 
 import { Antic_Didone } from "next/font/google";
-import SectionDescribe from "./SectionDescribe";
+import SectionDescribe from "../SectionDescribe";
 import { cn } from "@/lib/utils";
 
 const font = Antic_Didone({
@@ -15,7 +15,7 @@ const font = Antic_Didone({
   variable: "--font-body",
 });
 
-export default function Project({
+export default function ProjectDesktop({
   isFinishLoading = false,
 }: {
   isFinishLoading: boolean;
@@ -92,7 +92,7 @@ export default function Project({
     <>
       <section
         id="project"
-        className="relative min-h-screen overflow-hidden bg-foreground px-16 pb-[20vh]"
+        className="relative min-h-screen overflow-hidden bg-foreground px-4 pb-[20vh] lg:px-16"
       >
         <SectionDescribe title="selected projects" />
 

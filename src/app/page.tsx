@@ -9,7 +9,7 @@ import { cn } from "@/lib/utils";
 
 import Hero from "./components/Hero";
 import StickyHeader from "./components/StickyHeader";
-import Project from "./components/Project";
+import ProjectDesktop from "./components/ProjectSections/ProjectDesktop";
 import Cursor from "./components/Cursor";
 import Introduce from "./components/Introduce";
 import AboutMe from "./components/AboutMe";
@@ -26,7 +26,7 @@ gsap.registerPlugin(useGSAP);
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Page() {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const ref = useRef(null);
 
   return (
@@ -47,7 +47,7 @@ export default function Page() {
       {/*<Hero isFinishLoading={!isLoading} />*/}
       <HeroTest />
       <Introduce />
-      <Project isFinishLoading={!isLoading} />
+      <ProjectDesktop isFinishLoading={!isLoading} />
       <AboutMe />
       <Contact />
 
