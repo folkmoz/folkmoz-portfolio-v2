@@ -176,14 +176,14 @@ export default function ProjectDesktop() {
                 <div
                   key={project.title + index}
                   style={{
-                    // opacity: currentProject === index ? 1 : 0.2,
+                    opacity: currentProject === index ? 1 : 0.2,
                     width: "100%",
                     top: "0",
                     position: !index ? "relative" : "absolute",
                     transform: `translateY(${index * 100}%)`,
                   }}
                   className={cn(
-                    "origin-bottom-right text-center font-body font-bold leading-none",
+                    "origin-bottom-right text-center font-body font-bold leading-none transition-opacity",
                     project.title.length > 10 ? "text-[9vw]" : "text-[10vw]",
                   )}
                 >
