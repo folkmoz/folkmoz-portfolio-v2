@@ -22,8 +22,7 @@ export default function HeroTest() {
         letter.addEventListener("mouseenter", () => {
           gsap.to(letter, {
             ...letterAnim,
-            duration: 0.1,
-            ease: "expo",
+            duration: 0.01,
           });
         });
 
@@ -33,8 +32,7 @@ export default function HeroTest() {
             y: 0,
             textShadow:
               "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000",
-            duration: 0.1,
-            ease: "expo",
+            duration: 0.01,
           });
         });
       });

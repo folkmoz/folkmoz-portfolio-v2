@@ -1,129 +1,202 @@
 import Image from "next/image";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/all";
 import { DATA } from "@/data/resume";
 
-import { Antic_Didone } from "next/font/google";
 import SectionDescribe from "../SectionDescribe";
 import { cn } from "@/lib/utils";
+import { splitLetters } from "@/app/helpers/splitText";
 
-const font = Antic_Didone({
-  weight: ["400"],
-  subsets: ["latin"],
-  variable: "--font-body",
-});
+export default function ProjectDesktop() {
+  const [disableCursor, setDisableCursor] = useState(true);
+  const [isEntered, setIsEntered] = useState(false);
 
-export default function ProjectDesktop({
-  isFinishLoading = false,
-}: {
-  isFinishLoading: boolean;
-}) {
-  const container = useRef<HTMLDivElement | null>(null);
   const pinned = useRef<HTMLDivElement | null>(null);
   const imagesRef = useRef<HTMLDivElement | null>(null);
   const titleRef = useRef<HTMLDivElement | null>(null);
+  const cursorRef = useRef<HTMLDivElement | null>(null);
 
   const [currentProject, setCurrentProject] = useState(0);
 
-  useGSAP(() => {
-    const titles = titleRef.current!.querySelectorAll("div");
+  const onMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!isEntered) return;
 
-    titles.forEach((title, i) => {
+    const { clientX, clientY } = e;
+
+    const cursor = cursorRef.current!;
+
+    const x = clientX - cursor.clientWidth / 2;
+    const y = clientY - cursor.clientHeight / 2;
+
+    gsap.to(cursor, {
+      scale: 1.2,
+      top: 0,
+      left: 0,
+      xPercent: -50,
+      yPercent: -50,
+      x: x + 10,
+      y: y + cursor.clientHeight * 0.4,
+      duration: 0.5,
+    });
+  };
+
+  useGSAP(
+    () => {
+      const titles = titleRef.current!.querySelectorAll("div");
+
+      titles.forEach((title, i) => {
+        const letters = title.querySelectorAll("span");
+        const genAnimationProps = (yPercent: number) => ({
+          yPercent,
+          ease: "power3.inOut",
+          stagger: 0.02,
+        });
+
+        ScrollTrigger.create({
+          trigger: pinned.current,
+          start: () => "top -" + window.innerHeight * i,
+          end: () => "+=" + window.innerHeight,
+          toggleActions: "play none reverse none",
+          invalidateOnRefresh: true,
+          onEnter: () => {
+            setCurrentProject(i);
+            gsap.to(letters, {
+              ...genAnimationProps(-100 * i),
+            });
+          },
+          onLeave: () => {
+            gsap.to(letters, {
+              ...genAnimationProps(-100 * (i + 1)),
+            });
+          },
+          onToggle: () => {
+            setCurrentProject(i);
+            gsap.to(letters, {
+              ...genAnimationProps(-100 * i),
+            });
+          },
+          onLeaveBack: () => {
+            setCurrentProject(i);
+            gsap.to(letters, {
+              ...genAnimationProps(100 * i),
+            });
+          },
+        });
+      });
+
+      const images = imagesRef.current!.querySelectorAll(
+        "div:not(:last-child)",
+      );
+      images.forEach((image, i) => {
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: pinned.current,
+            start: () => "top -" + window.innerHeight * (i + 0.5),
+            end: () => "+=" + window.innerHeight,
+            scrub: true,
+            toggleActions: "play none reverse none",
+            invalidateOnRefresh: true,
+          },
+        });
+
+        tl.to(image, {
+          clipPath: "inset(0% 0% 100% 0%)",
+        });
+      });
+
       ScrollTrigger.create({
         trigger: pinned.current,
-        start: () => "top -" + window.innerHeight * i,
-        end: () => "+=" + window.innerHeight,
-        toggleActions: "play none reverse none",
-        // invalidateOnRefresh: true,
-        onEnter: () => {
-          setCurrentProject(i);
-          gsap.to(titleRef.current, {
-            y: -100 * i + "vh",
-            ease: "power2.inOut",
-          });
-        },
-        onToggle: () => {
-          setCurrentProject(i);
-          gsap.to(titleRef.current, {
-            y: -100 * i + "vh",
-            ease: "power2.inOut",
-          });
-        },
-        onLeaveBack: () => {
-          setCurrentProject(i);
-          gsap.to(titleRef.current, {
-            y: -100 * i + "vh",
-            ease: "power2.inOut",
-          });
+        start: "top top",
+        end: `+=${DATA.projects.fullDev.length * window.innerHeight}`,
+        scrub: true,
+        pin: true,
+        onToggle: ({ isActive }) => {
+          setIsEntered(isActive);
         },
       });
-    });
+    },
+    {
+      scope: pinned,
+    },
+  );
 
-    const images = imagesRef.current!.querySelectorAll("div:not(:last-child)");
-    images.forEach((image, i) => {
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: pinned.current,
-          start: () => "top -" + window.innerHeight * (i + 0.5),
-          end: () => "+=" + window.innerHeight,
-          scrub: true,
-          toggleActions: "play none reverse none",
-          // invalidateOnRefresh: true,
-        },
+  useEffect(() => {
+    if (disableCursor || !isEntered) {
+      gsap.to(cursorRef.current, {
+        scale: 1.35,
+        top: "50%",
+        left: "50%",
+        xPercent: "-50",
+        yPercent: "-50",
+        x: 0,
+        y: 20,
+        duration: 0.5,
+        ease: "power3.inOut",
       });
-
-      tl.to(image, {
-        clipPath: "inset(0% 0% 100% 0%)",
-      });
-    });
-
-    ScrollTrigger.create({
-      trigger: pinned.current,
-      start: "top top",
-      end: `+=${DATA.projects.fullDev.length * window.innerHeight}`,
-      scrub: true,
-      pin: true,
-    });
-  }, []);
+    }
+  }, [disableCursor, isEntered]);
 
   return (
     <>
       <section
         id="project"
-        className="relative min-h-screen overflow-hidden bg-foreground px-4 pb-[20vh] lg:px-16"
+        className={cn(
+          "relative min-h-screen overflow-hidden bg-foreground px-4 pb-[20vh] lg:px-16",
+          {
+            "cursor-pointer": isEntered,
+          },
+        )}
       >
         <SectionDescribe title="selected projects" />
 
         <div
           ref={pinned}
-          className="relative grid min-h-screen place-items-center"
+          className={cn("relative grid min-h-screen place-items-center", {
+            "pointer-events-none": !isEntered,
+          })}
         >
-          <div className="pointer-events-none absolute inset-0 z-[1] grid items-end justify-items-end px-16">
-            <div ref={titleRef} className={"relative w-full text-white"}>
+          <div className="relative flex h-full w-full items-center justify-center">
+            <div
+              ref={cursorRef}
+              className={cn(
+                "pointer-events-none absolute left-1/2 top-1/2 z-50 grid size-[150px] -translate-x-1/2 place-items-center rounded-full border border-white",
+              )}
+            >
+              <div className="flex items-center text-white">View project</div>
+            </div>
+          </div>
+          <div className="pointer-events-none absolute inset-0 z-[1] grid grid-cols-1 items-end justify-center px-16">
+            <div
+              ref={titleRef}
+              className={"relative w-full overflow-hidden text-white"}
+            >
               {DATA.projects.fullDev.map((project, index) => (
                 <div
                   key={project.title + index}
                   style={{
-                    opacity: currentProject === index ? 1 : 0.2,
+                    // opacity: currentProject === index ? 1 : 0.2,
                     width: "100%",
                     top: "0",
                     position: !index ? "relative" : "absolute",
-                    transform: `translateY(${index * 100}vh)`,
+                    transform: `translateY(${index * 100}%)`,
                   }}
                   className={cn(
-                    "origin-bottom-right text-right font-body font-bold",
-                    project.title.length > 10 ? "text-[8vw]" : "text-[10vw]",
+                    "origin-bottom-right text-center font-body font-bold leading-none",
+                    project.title.length > 10 ? "text-[9vw]" : "text-[10vw]",
                   )}
                 >
-                  {project.title}
+                  {splitLetters(project.title)}
                 </div>
               ))}
             </div>
           </div>
 
           <div
+            onMouseMove={onMouseMove}
+            onMouseLeave={() => setDisableCursor(true)}
+            onMouseEnter={() => setDisableCursor(false)}
             ref={imagesRef}
             data-cursor="project"
             className="absolute inset-0 w-full"
@@ -135,7 +208,7 @@ export default function ProjectDesktop({
                   zIndex: -index,
                   scale: 0.9,
                 }}
-                className="absolute top-1/2 block aspect-video w-full -translate-y-1/2 cursor-pointer overflow-hidden rounded-[1rem] before:pointer-events-none before:absolute before:inset-0 before:z-[1] before:bg-black/60"
+                className="pointer-events-none absolute top-1/2 block aspect-video w-full -translate-y-1/2 overflow-hidden rounded-[1rem] before:pointer-events-none before:absolute before:inset-0 before:z-[1] before:bg-black/60"
               >
                 <Image
                   src={project.image}

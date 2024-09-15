@@ -391,7 +391,7 @@ const Heading = ({ text }: { text: string }) => {
       <div className="overflow-hidden not-italic text-white/80">
         <span className="block">{text}</span>
       </div>
-      <span className="mt-2 block h-2 flex-1 origin-right rounded-full bg-white/80 lg:mt-4 lg:w-1/3"></span>
+      <span className="mt-2 block h-2 flex-1 origin-right rounded-full bg-white/80 lg:mt-4 lg:w-1/3 lg:flex-none"></span>
     </div>
   );
 };

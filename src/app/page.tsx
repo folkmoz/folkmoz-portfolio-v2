@@ -38,16 +38,14 @@ export default function Page() {
           <Preloader setIsLoading={setIsLoading} />
         </Suspense>
       ) : (
-        <>
-          <Cursor />
-        </>
+        <>{/*<Cursor />*/}</>
       )}
       <StickyHeader />
 
       {/*<Hero isFinishLoading={!isLoading} />*/}
       <HeroTest />
       <Introduce />
-      <ProjectDesktop isFinishLoading={!isLoading} />
+      <ProjectDesktop />
       <AboutMe />
       <Contact />
 
