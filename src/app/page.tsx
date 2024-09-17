@@ -23,12 +23,13 @@ const Preloader = dynamic(() => import("./components/Preloader"), {
 
 gsap.registerPlugin(useGSAP);
 gsap.registerPlugin(ScrollTrigger);
-ScrollTrigger.clearScrollMemory("manual");
 
 export default function Page() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    ScrollTrigger.clearScrollMemory("manual");
+
     if (isLoading) {
       document.body.style.overflow = "hidden";
       window.scrollTo(0, 0);
