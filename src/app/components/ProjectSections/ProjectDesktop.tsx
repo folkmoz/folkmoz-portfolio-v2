@@ -50,6 +50,7 @@ export default function ProjectDesktop() {
   };
 
   const onProjectClick = () => {
+    if (isClosing) return;
     const titles = titleRef.current?.children;
 
     if (!titles) return;
@@ -131,7 +132,7 @@ export default function ProjectDesktop() {
 
     tl.to(projectDetailRef.current, {
       clipPath: "inset(100% 0% 0% 0%)",
-      ease: "power4.out",
+      ease: "power2",
       duration: 0.7,
     }).to(imagesRef.current, {
       clipPath: "inset(0% 0% 0% 0%)",

@@ -16,6 +16,7 @@ import NoiseFilterSVG from "@/app/components/NoiseFilterSVG";
 import HeroTest from "@/app/components/HeroTest";
 import Contact from "@/app/components/Contact";
 import { ReactLenis } from "lenis/react";
+import LegacyContact from "@/app/components/Lagacy-Contact";
 
 const Preloader = dynamic(() => import("./components/Preloader"), {
   ssr: false,
@@ -25,10 +26,10 @@ gsap.registerPlugin(useGSAP);
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Page() {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    ScrollTrigger.clearScrollMemory("manual");
+    // ScrollTrigger.clearScrollMemory("manual");
 
     if (isLoading) {
       document.body.style.overflow = "hidden";
@@ -56,7 +57,8 @@ export default function Page() {
         <Introduce />
         <ProjectDesktop />
         <AboutMe />
-        <Contact />
+        {/*<Contact />*/}
+        <LegacyContact />
         <NoiseFilterSVG />
       </main>
     </ReactLenis>

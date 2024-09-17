@@ -120,7 +120,9 @@ export default function ProjectDetail({
                   </a>
                 ) : (
                   <span className="inline text-lg font-normal italic">
-                    (site not available)
+                    <RevealText>
+                      <>(site not available)</>
+                    </RevealText>
                   </span>
                 )}
               </div>
