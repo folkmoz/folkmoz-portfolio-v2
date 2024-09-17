@@ -50,7 +50,7 @@ export default function ProjectDesktop() {
   };
 
   const onProjectClick = () => {
-    if (isClosing) return;
+    if (isClosing || !isEntered) return;
     const titles = titleRef.current?.children;
 
     if (!titles) return;

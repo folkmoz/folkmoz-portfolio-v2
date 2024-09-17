@@ -26,10 +26,10 @@ gsap.registerPlugin(useGSAP);
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Page() {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // ScrollTrigger.clearScrollMemory("manual");
+    ScrollTrigger.clearScrollMemory("manual");
 
     if (isLoading) {
       document.body.style.overflow = "hidden";
