@@ -26,7 +26,7 @@ gsap.registerPlugin(ScrollTrigger);
 ScrollTrigger.clearScrollMemory("manual");
 
 export default function Page() {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     if (isLoading) {
