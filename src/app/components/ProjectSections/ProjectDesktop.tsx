@@ -67,10 +67,8 @@ export default function ProjectDesktop() {
       paused: true,
       onStart: () => {
         document.body.style.overflow = "hidden";
-      },
-      onReverseComplete: () => {
-        document.body.style.overflow = "visible";
-        setIsViewed(false);
+        document.body.style.marginRight = "-17px";
+        document.body.style.paddingRight = "17px";
       },
     });
 
@@ -117,6 +115,8 @@ export default function ProjectDesktop() {
       paused: true,
       onStart: () => {
         document.body.style.overflow = "visible";
+        document.body.style.marginRight = "0";
+        document.body.style.paddingRight = "0";
       },
       onComplete: () => {
         setIsViewed(false);
@@ -137,7 +137,7 @@ export default function ProjectDesktop() {
 
     tl.to(projectDetailRef.current, {
       clipPath: "inset(100% 0% 0% 0%)",
-      ease: "power2",
+      ease: "power4.out",
       duration: 0.7,
     }).to(imagesRef.current, {
       clipPath: "inset(0% 0% 0% 0%)",
@@ -157,7 +157,7 @@ export default function ProjectDesktop() {
         ease: "power3.inOut",
         stagger: 0.02,
       },
-      "<",
+      "-=0.5",
     ).to(cursorRef.current, {
       scale: 1,
       opacity: 1,
@@ -295,8 +295,9 @@ export default function ProjectDesktop() {
         >
           <div
             ref={projectDetailRef}
+            data-lenis-prevent="true"
             className={cn(
-              "fixed inset-0 z-[999] bg-foreground/20 px-4 pt-24 backdrop-blur-lg transition-all lg:bg-foreground/40 lg:px-16 lg:pt-32 xl:px-20",
+              "fixed inset-0 z-[999] mr-[-17px] bg-foreground/20 px-4 pt-24 backdrop-blur-lg transition-all lg:bg-foreground/40 lg:px-16 lg:pt-32 xl:px-20",
               isViewed ? "opacity-100" : "opacity-0",
               isClosing
                 ? "overflow-hidden"

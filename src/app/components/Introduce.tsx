@@ -42,7 +42,7 @@ export default function Introduce() {
           scrollTrigger: {
             trigger: container.current,
             start: "top bottom",
-            end: "top 20%",
+            end: "top 30%",
             scrub: 1,
           },
         });
@@ -58,7 +58,7 @@ export default function Introduce() {
     <section
       id="introduce"
       ref={container}
-      className="relative -mb-1 flex h-[50svh] flex-col rounded-t-[2rem] bg-foreground md:min-h-screen md:scale-[0.95] md:pb-[20vh]"
+      className="relative -mb-1 flex h-[50svh] flex-col rounded-t-[2rem] bg-foreground md:min-h-screen md:pb-[20vh] lg:scale-[0.95]"
     >
       <div className="mx-auto w-full px-4 py-16 pt-[200px] md:px-16 md:pt-[300px] lg:px-32">
         <div

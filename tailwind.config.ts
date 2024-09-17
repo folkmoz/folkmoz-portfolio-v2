@@ -10,6 +10,9 @@ const config = {
   ],
   theme: {
     extend: {
+      fontSize: {
+        "heading-responsive": ["clamp(1.5rem, 5vw, 5rem)", "1.5"],
+      },
       fontFamily: {
         heading: ["var(--font-heading)", ...fontFamily.sans],
         body: ["var(--font-body)", ...fontFamily.sans],

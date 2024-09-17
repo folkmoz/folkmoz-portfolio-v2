@@ -95,9 +95,9 @@ export default function ProjectDetail({
         </div>
 
         <div className="mt-12 h-auto pb-20">
-          <div className="grid grid-cols-12 gap-y-20">
-            <div className="col-span-4">
-              <div className="relative flex max-w-max items-end gap-4 text-left font-body font-bold leading-none xl:text-6xl">
+          <div className="flex gap-y-20">
+            <div className="flex-1">
+              <div className="text-heading-responsive relative flex max-w-max items-end gap-4 text-left font-body font-bold leading-none">
                 <AnimatedText
                   words={[project.title]}
                   atViewport={"top bottom"}
@@ -125,31 +125,31 @@ export default function ProjectDetail({
                 )}
               </div>
             </div>
-            <div className="col-span-6 col-start-7">
+            <div className="flex-1">
               <div className="text-xl md:text-2xl lg:text-3xl xl:text-3xl">
                 <RevealText>
                   <>{project.description}</>
                 </RevealText>
               </div>
-            </div>
 
-            <div className="col-span-6 col-start-7">
-              <div>
-                <h2 className="font-body text-2xl font-bold">
-                  Technologies used
-                </h2>
-              </div>
-              <div className="mt-6 flex flex-wrap gap-2">
-                {project.stacks.map((tech, index) => (
-                  <div
-                    key={tech + index}
-                    className={cn(
-                      "rounded-lg bg-white bg-opacity-10 px-4 py-2",
-                    )}
-                  >
-                    {tech}
-                  </div>
-                ))}
+              <div className="mt-20">
+                <div>
+                  <h2 className="font-body text-2xl font-bold">
+                    Technologies used
+                  </h2>
+                </div>
+                <div className="mt-6 flex flex-wrap gap-2">
+                  {project.stacks.map((tech, index) => (
+                    <div
+                      key={tech + index}
+                      className={cn(
+                        "rounded-lg bg-white bg-opacity-10 px-4 py-2",
+                      )}
+                    >
+                      {tech}
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
