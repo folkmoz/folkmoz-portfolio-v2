@@ -23,7 +23,7 @@ const Preloader = dynamic(() => import("./components/Preloader"), {
 
 gsap.registerPlugin(useGSAP);
 gsap.registerPlugin(ScrollTrigger);
-// ScrollTrigger.clearScrollMemory("manual");
+ScrollTrigger.clearScrollMemory("manual");
 
 export default function Page() {
   const [isLoading, setIsLoading] = useState(false);
