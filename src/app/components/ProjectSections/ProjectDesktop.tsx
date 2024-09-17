@@ -1,22 +1,35 @@
 import Image from "next/image";
-import React, { useEffect, useRef, useState } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
-import { ScrollTrigger } from "gsap/all";
+import { useLenis } from "lenis/react";
+import { ScrollTrigger, Flip } from "gsap/all";
 import { DATA } from "@/data/resume";
 
 import SectionDescribe from "../SectionDescribe";
 import { cn } from "@/lib/utils";
 import { splitLetters } from "@/app/helpers/splitText";
+import ProjectDetail from "@/app/components/ProjectSections/ProjectDetail";
+
+gsap.registerPlugin(Flip);
 
 export default function ProjectDesktop() {
   const [disableCursor, setDisableCursor] = useState(true);
   const [isEntered, setIsEntered] = useState(false);
+  const [isViewed, setIsViewed] = useState(false);
+  const [isClosing, setIsClosing] = useState(false);
 
-  const pinned = useRef<HTMLDivElement | null>(null);
-  const imagesRef = useRef<HTMLDivElement | null>(null);
-  const titleRef = useRef<HTMLDivElement | null>(null);
-  const cursorRef = useRef<HTMLDivElement | null>(null);
+  const pinned = useRef<HTMLDivElement>(null);
+  const imagesRef = useRef<HTMLDivElement>(null);
+  const titleRef = useRef<HTMLDivElement>(null);
+  const cursorRef = useRef<HTMLDivElement>(null);
+  const projectDetailRef = useRef<HTMLDivElement>(null);
 
   const [currentProject, setCurrentProject] = useState(0);
 
@@ -36,11 +49,135 @@ export default function ProjectDesktop() {
       left: 0,
       xPercent: -50,
       yPercent: -50,
-      x: x + 10,
+      x: x + 70,
       y: y + cursor.clientHeight * 0.4,
       duration: 0.5,
     });
   };
+
+  const onProjectClick = () => {
+    const titles = titleRef.current?.children;
+
+    if (!titles) return;
+
+    const currentTitle = titles[currentProject] as HTMLDivElement;
+    const letters = currentTitle.querySelectorAll("span");
+
+    const tl = gsap.timeline({
+      paused: true,
+      onStart: () => {
+        document.body.style.overflow = "hidden";
+      },
+      onReverseComplete: () => {
+        document.body.style.overflow = "visible";
+        setIsViewed(false);
+      },
+    });
+
+    tl.to(cursorRef.current, {
+      scale: 0,
+      opacity: 0,
+      duration: 0.5,
+      ease: "power3.inOut",
+    }).to(
+      letters,
+      {
+        yPercent: -100 * currentProject - 100,
+        ease: "power3.inOut",
+        stagger: 0.02,
+        onComplete: () => setIsViewed(true),
+      },
+      "-=0.2",
+    );
+    tl.to(
+      imagesRef.current,
+      {
+        clipPath: "inset(0% 0% 100% 0%)",
+        opacity: 0,
+        duration: 1,
+        ease: "power3.inOut",
+      },
+      "-=0.5",
+    );
+
+    tl.play();
+  };
+
+  const onProjectClose = () => {
+    const titles = titleRef.current?.children;
+
+    if (!titles) return;
+
+    setIsClosing(true);
+
+    const currentTitle = titles[currentProject] as HTMLDivElement;
+    const letters = currentTitle.querySelectorAll("span");
+
+    const tl = gsap.timeline({
+      paused: true,
+      onStart: () => {
+        document.body.style.overflow = "visible";
+      },
+      onComplete: () => {
+        setIsViewed(false);
+        if (projectDetailRef.current) {
+          projectDetailRef.current.style.clipPath = "inset(0% 0% 0% 0%)";
+          setTimeout(() => {
+            projectDetailRef.current!.style.display = "block";
+            setIsClosing(false);
+          }, 500);
+        }
+      },
+    });
+    gsap.to("#mobile-menu", {
+      scale: 1,
+      duration: 0.5,
+      delay: 0.5,
+    });
+
+    tl.to(projectDetailRef.current, {
+      clipPath: "inset(100% 0% 0% 0%)",
+      ease: "power2",
+      duration: 0.7,
+    }).to(imagesRef.current, {
+      clipPath: "inset(0% 0% 0% 0%)",
+      opacity: 1,
+      duration: 1,
+      ease: "power3.inOut",
+      onComplete: () => {
+        if (projectDetailRef.current) {
+          projectDetailRef.current.style.display = "none";
+        }
+      },
+    });
+    tl.to(
+      letters,
+      {
+        yPercent: -100 * currentProject,
+        ease: "power3.inOut",
+        stagger: 0.02,
+      },
+      "<",
+    ).to(cursorRef.current, {
+      scale: 1,
+      opacity: 1,
+      duration: 0.5,
+      ease: "power3.inOut",
+    });
+
+    tl.play();
+  };
+
+  useLenis(
+    (lenis) => {
+      if (isViewed) {
+        lenis.stop();
+      } else {
+        lenis.start();
+      }
+    },
+    [isViewed],
+  );
 
   useGSAP(
     () => {
@@ -59,7 +196,7 @@ export default function ProjectDesktop() {
           start: () => "top -" + window.innerHeight * i,
           end: () => "+=" + window.innerHeight,
           toggleActions: "play none reverse none",
-          invalidateOnRefresh: true,
+          // invalidateOnRefresh: true,
           onEnter: () => {
             setCurrentProject(i);
             gsap.to(letters, {
@@ -97,7 +234,7 @@ export default function ProjectDesktop() {
             end: () => "+=" + window.innerHeight,
             scrub: true,
             toggleActions: "play none reverse none",
-            invalidateOnRefresh: true,
+            // invalidateOnRefresh: true,
           },
         });
 
@@ -138,25 +275,42 @@ export default function ProjectDesktop() {
     }
   }, [disableCursor, isEntered]);
 
+  const project = DATA.projects.fullDev[currentProject];
+
   return (
     <>
       <section
         id="project"
-        className={cn(
-          "relative min-h-screen overflow-hidden bg-foreground px-4 pb-[20vh] lg:px-16",
-          {
-            "cursor-pointer": isEntered,
-          },
-        )}
+        className="relative min-h-screen overflow-hidden bg-foreground pb-[20vh]"
       >
-        <SectionDescribe title="selected projects" />
+        <div className="px-4 lg:px-16">
+          <SectionDescribe title="selected projects" />
+        </div>
 
         <div
           ref={pinned}
           className={cn("relative grid min-h-screen place-items-center", {
-            "pointer-events-none": !isEntered,
+            "cursor-pointer": isEntered && !isViewed,
           })}
         >
+          <div
+            ref={projectDetailRef}
+            className={cn(
+              "fixed inset-0 z-[999] bg-foreground/20 px-4 pt-24 backdrop-blur-lg transition-all lg:bg-foreground/40 lg:px-16 lg:pt-32 xl:px-20",
+              isViewed ? "opacity-100" : "opacity-0",
+              isClosing
+                ? "overflow-hidden"
+                : "overflow-x-hidden overflow-y-scroll",
+              {
+                "pointer-events-none": !isViewed,
+              },
+            )}
+          >
+            {isViewed && (
+              <ProjectDetail project={project} onClose={onProjectClose} />
+            )}
+          </div>
+
           <div className="relative flex h-full w-full items-center justify-center">
             <div
               ref={cursorRef}
@@ -195,11 +349,12 @@ export default function ProjectDesktop() {
 
           <div
             onMouseMove={onMouseMove}
+            onClick={onProjectClick}
             onMouseLeave={() => setDisableCursor(true)}
             onMouseEnter={() => setDisableCursor(false)}
             ref={imagesRef}
             data-cursor="project"
-            className="absolute inset-0 w-full"
+            className="absolute inset-0 mx-auto grid w-full max-w-screen-2xl grid-cols-1 place-items-center gap-y-20"
           >
             {DATA.projects.fullDev.map((project, index) => (
               <div

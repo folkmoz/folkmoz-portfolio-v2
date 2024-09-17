@@ -1,7 +1,6 @@
 import "./globals.css";
 
 import type { Metadata } from "next";
-import { Rubik_Doodle_Shadow } from "next/font/google";
 import localFont from "next/font/local";
 import { DATA } from "@/data/resume";
 import { cn } from "@/lib/utils";
@@ -39,17 +38,12 @@ const fontHeading = localFont({
   variable: "--font-heading",
 });
 
-// const font = Rubik_Doodle_Shadow({
-//   weight: ["400"],
-//   subsets: ["latin"],
-//   display: "swap",
-//   variable: "--font-heading",
-// });
-
 export const metadata: Metadata = {
   title: `${DATA.name} - Portfolio`,
   description: "folkmoz is a personal portfolio website",
 };
+
+const isProduction = process.env.NODE_ENV === "production";
 
 export default function RootLayout({
   children,
@@ -61,12 +55,14 @@ export default function RootLayout({
       <body
         className={cn(
           "bg-[#f5f8fa] antialiased",
+          isProduction && "overflow-hidden",
           fontHeading.variable,
           fontBody.variable,
         )}
       >
         {children}
         <TailwindcssIndicator />
+        <div id="portal-root"></div>
       </body>
     </html>
   );

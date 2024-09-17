@@ -116,7 +116,6 @@ export default function StickyHeader() {
         className="fixed left-0 right-0 top-0 z-20 h-[150px]"
       >
         <header className="flex h-full w-full items-center justify-between px-4 py-4 lg:px-12">
-          <div className="absolute inset-0 blur-lg"></div>
           <Link href="/" className="font-heading text-xl">
             <svg
               className="size-12"

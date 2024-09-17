@@ -53,7 +53,10 @@ export default function Preloader({
       gsap
         .timeline({
           delay: 1,
-          onComplete: () => setIsLoading(false),
+          onComplete: () => {
+            setIsLoading(false);
+            document.body.style.overflow = "auto";
+          },
         })
         .to(non, {
           top: dimension.height / 3,
