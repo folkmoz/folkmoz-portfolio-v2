@@ -82,7 +82,7 @@ export default function StickyHeader() {
     };
 
     gsap.to(headerRef.current, {
-      height: "100px",
+      height: isMobile ? 80 : 100,
       ease: "power4.inOut",
       scrollTrigger: trigger,
     });
@@ -115,8 +115,9 @@ export default function StickyHeader() {
         ref={headerRef}
         className="fixed left-0 right-0 top-0 z-20 h-[150px]"
       >
-        <header className="flex h-full w-full items-center justify-between px-4 py-4 lg:px-12">
-          <Link href="/" className="font-heading text-xl">
+        <div className="absolute inset-0 backdrop-blur-lg"></div>
+        <header className="flex h-full w-full items-center justify-between px-3 py-4 md:px-4 lg:px-12">
+          <Link href="/" className="relative z-10 font-heading text-xl">
             <svg
               className="size-12"
               width="95"
@@ -163,7 +164,7 @@ const MenuMobile = () => {
     <MagneticButton>
       <div
         id="mobile-menu"
-        className="cursor-pointer space-y-1 p-4 lg:opacity-0"
+        className="cursor-pointer space-y-1 p-2 md:p-4 lg:opacity-0"
       >
         <Line width={"w-8"} />
         <Line width={"w-10"} />

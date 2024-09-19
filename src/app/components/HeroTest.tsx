@@ -56,7 +56,7 @@ export default function HeroTest() {
       <section
         id="hero"
         ref={container}
-        className="sticky top-0 grid min-h-[calc(100vh-50px)] place-items-center bg-[#f5f8fa]"
+        className="sticky top-0 grid min-h-[calc(100svh-50px)] place-items-center bg-[#f5f8fa]"
       >
         <div className="flex h-full w-full flex-col items-center justify-center">
           <div

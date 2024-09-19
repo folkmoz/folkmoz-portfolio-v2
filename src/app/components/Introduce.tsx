@@ -19,6 +19,7 @@ export default function Introduce() {
         const letters = line.querySelectorAll("span");
 
         gsap.to(letters, {
+          autoAlpha: 1,
           opacity: 1,
           fontStyle: "normal",
           fontWeight: "700",
@@ -26,7 +27,7 @@ export default function Introduce() {
           ease: "none",
           scrollTrigger: {
             trigger: container.current,
-            start: `top 60%-=${index * 100}`,
+            start: isMobile ? "top 80%" : `top 60%-=${index * 100}`,
             end: `+=${window.innerHeight / 2 - index * 10}`,
             scrub: 1,
           },
@@ -58,7 +59,7 @@ export default function Introduce() {
     <section
       id="introduce"
       ref={container}
-      className="relative -mb-1 flex h-[50svh] flex-col rounded-t-[2rem] bg-foreground md:min-h-screen md:pb-[20vh] lg:scale-[0.95]"
+      className="relative -mb-1 flex h-[50svh] flex-col rounded-t-[1rem] bg-foreground md:min-h-screen md:pb-[20vh] lg:scale-[0.95] lg:rounded-t-[2rem]"
     >
       <div className="mx-auto w-full px-4 py-16 pt-[200px] md:px-16 md:pt-[300px] lg:px-32">
         <div

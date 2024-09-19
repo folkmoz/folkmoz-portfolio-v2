@@ -7,13 +7,13 @@ export default function LegacyContact() {
   return (
     <>
       <section
-        className="relative z-10 h-screen bg-white"
+        className="relative z-10 h-[800px] bg-white lg:h-[90svh]"
         style={{ clipPath: "polygon(0% 0, 100% 0%, 100% 100%, 0 100%)" }}
       >
-        <div className="relative -top-[100vh] h-[200vh]">
-          <div className="sticky top-0 h-screen">
-            <div className="md:py-[5vh h-screen w-full overflow-hidden bg-white px-4 pt-20 md:px-10">
-              <div className="flex h-full flex-col">
+        <div className="relative -top-[100vh] h-[calc(100svh+800px)] lg:h-[190svh]">
+          <div className="sticky top-0 flex h-[800px] lg:h-[90svh]">
+            <div className="h-[800px] w-full overflow-hidden bg-white px-4 pt-20 md:px-10 md:py-[5vh] lg:h-[90svh]">
+              <div className="flex h-full flex-col justify-center">
                 <div className="text-5xl font-bold md:text-8xl 2xl:text-9xl">
                   <h3 className="text-foreground">
                     <AnimatedText
@@ -109,7 +109,7 @@ const ContactItem = ({ title, account, subtitle, href }: ContactItemProps) => {
         onMouseEnter={onHover}
         onMouseLeave={onLeave}
         data-cursor="link"
-        className="h-full py-10 md:py-0"
+        className="h-full py-6 md:py-0"
       >
         <div className="flex h-full items-center justify-between px-4">
           <div className="flex items-end text-4xl text-foreground/30 sm:text-5xl md:text-8xl xl:text-[6vw]">

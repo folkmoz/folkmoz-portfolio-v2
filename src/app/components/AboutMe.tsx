@@ -60,11 +60,12 @@ export default function AboutMe() {
 
     const profileImage = profileRef.current!.querySelector("img");
     // Profile animation
+
     gsap
       .timeline({
         scrollTrigger: {
           trigger: profileImage,
-          start: "top-=700",
+          start: isMobile ? "top 80%" : "top-=700",
           end: "top",
           // toggleActions: "play none none none",
           once: isMobile,
@@ -139,18 +140,18 @@ export default function AboutMe() {
   return (
     <section
       id="about-me"
-      className="relative flex min-h-screen flex-col bg-foreground"
+      className="relative flex min-h-svh flex-col bg-foreground"
     >
-      <div className="px-8 lg:px-16">
+      <div className="px-4 md:px-8 lg:px-16">
         <SectionDescribe title="about me" />
 
         <div
           ref={pinnedRef}
-          className="mt-30 grid h-screen w-full grid-cols-5 items-center justify-items-start lg:mt-60 lg:overflow-hidden"
+          className="mt-30 flex w-full grid-cols-5 flex-col items-center justify-items-start gap-8 lg:mt-60 lg:grid lg:h-screen lg:gap-0 lg:overflow-hidden"
         >
           <div
             ref={profileRef}
-            className="relative col-span-full h-[600px] w-full overflow-hidden rounded-[16px] lg:col-span-2 lg:h-[700px] lg:rounded-[24px]"
+            className="relative col-span-full h-[400px] w-full overflow-hidden rounded-[16px] lg:col-span-2 lg:h-[700px] lg:rounded-[24px]"
           >
             <Image
               src="/images/me.jpg"
@@ -202,7 +203,7 @@ export default function AboutMe() {
         </div>
       </div>
 
-      <div className="flex h-full w-full flex-col gap-32 px-8 pb-[50vh] pt-16 text-white md:gap-56 md:px-20 md:pt-[10vh]">
+      <div className="flex h-full w-full flex-col gap-16 px-8 pb-20 pt-16 text-white md:gap-56 md:px-20 md:pt-[10vh] lg:pb-[50vh]">
         <div className="flex flex-col justify-between gap-6 xl:flex-row">
           <div className="text-5xl sm:text-6xl md:text-7xl 2xl:text-8xl">
             <h4 className="font-bold leading-[1.2]">

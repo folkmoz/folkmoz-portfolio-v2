@@ -276,10 +276,10 @@ export default function ProjectDesktop() {
     <>
       <section
         id="project"
-        className="relative min-h-screen overflow-hidden bg-foreground pb-[20vh]"
+        className="relative min-h-svh overflow-hidden bg-foreground pb-[20vh]"
       >
         <div className="px-4 lg:px-16">
-          <SectionDescribe title="selected projects" />
+          <SectionDescribe title="selected works" />
         </div>
 
         <div

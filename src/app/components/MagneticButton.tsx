@@ -1,6 +1,7 @@
 import React, { useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import useScreen from "@/app/hooks/useScreen";
 
 export default function MagneticButton({
   children,
@@ -8,9 +9,10 @@ export default function MagneticButton({
   children: React.ReactElement;
 }) {
   const magnetic = useRef<HTMLDivElement>(null);
+  const { isMobile } = useScreen();
 
   useGSAP(() => {
-    if (!magnetic.current) return;
+    if (!magnetic.current || isMobile) return;
 
     const xTo = gsap.quickTo(magnetic.current, "x", {
       duration: 1,

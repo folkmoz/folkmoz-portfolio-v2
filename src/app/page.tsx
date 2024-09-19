@@ -1,7 +1,6 @@
 "use client";
 
-import dynamic from "next/dynamic";
-import { Suspense, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/all";
@@ -15,39 +14,39 @@ import AboutMe from "./components/AboutMe";
 import NoiseFilterSVG from "@/app/components/NoiseFilterSVG";
 import HeroTest from "@/app/components/HeroTest";
 import Contact from "@/app/components/Contact";
-import { ReactLenis } from "lenis/react";
 import LegacyContact from "@/app/components/Lagacy-Contact";
-
-const Preloader = dynamic(() => import("./components/Preloader"), {
-  ssr: false,
-});
+import Preloader from "@/app/components/Preloader";
+import { useLenis } from "lenis/react";
+import useScreen from "@/app/hooks/useScreen";
+import ProjectMobile from "@/app/components/ProjectSections/ProjectMobile";
 
 gsap.registerPlugin(useGSAP);
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Page() {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
+  const lenis = useLenis();
+
+  const { isMobile } = useScreen();
 
   useEffect(() => {
     ScrollTrigger.clearScrollMemory("manual");
 
     if (isLoading) {
+      lenis?.stop();
       document.body.style.overflow = "hidden";
       window.scrollTo(0, 0);
     } else {
+      lenis?.start();
       document.body.style.overflow = "auto";
     }
-  }, [isLoading]);
+  }, [isLoading, lenis]);
 
   return (
-    <ReactLenis root>
+    <>
       <main className={cn("relative")}>
-        {isLoading ? (
-          <Suspense
-            fallback={<div className="fixed inset-0 z-20 flex bg-black"></div>}
-          >
-            <Preloader setIsLoading={setIsLoading} />
-          </Suspense>
+        {!isLoading ? (
+          <Preloader setIsLoading={setIsLoading} />
         ) : (
           <>{/*<Cursor />*/}</>
         )}
@@ -55,12 +54,12 @@ export default function Page() {
 
         <HeroTest />
         <Introduce />
-        <ProjectDesktop />
+        {isMobile ? <ProjectMobile /> : <ProjectDesktop />}
         <AboutMe />
         {/*<Contact />*/}
         <LegacyContact />
         <NoiseFilterSVG />
       </main>
-    </ReactLenis>
+    </>
   );
 }
