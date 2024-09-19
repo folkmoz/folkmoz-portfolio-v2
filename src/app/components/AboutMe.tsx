@@ -192,6 +192,8 @@ export default function AboutMe() {
                 <TextBody
                   words={["I'm fine ", ">thank you", ", sit down please"]}
                 />
+
+                <TextBody words={["CUM GPA: ", ">3.81", " (2023)"]} />
               </div>
 
               {/*<div className="translate-y-4">*/}

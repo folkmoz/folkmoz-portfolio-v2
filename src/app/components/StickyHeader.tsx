@@ -115,7 +115,7 @@ export default function StickyHeader() {
         ref={headerRef}
         className="fixed left-0 right-0 top-0 z-20 h-[150px]"
       >
-        <div className="absolute inset-0 backdrop-blur-lg"></div>
+        <div className="absolute inset-0 backdrop-blur-lg lg:hidden"></div>
         <header className="flex h-full w-full items-center justify-between px-3 py-4 md:px-4 lg:px-12">
           <Link href="/" className="relative z-10 font-heading text-xl">
             <svg

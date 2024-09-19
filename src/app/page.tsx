@@ -45,7 +45,7 @@ export default function Page() {
   return (
     <>
       <main className={cn("relative")}>
-        {!isLoading ? (
+        {isLoading ? (
           <Preloader setIsLoading={setIsLoading} />
         ) : (
           <>{/*<Cursor />*/}</>
