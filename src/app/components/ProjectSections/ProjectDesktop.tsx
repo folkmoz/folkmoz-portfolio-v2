@@ -278,7 +278,7 @@ export default function ProjectDesktop() {
         id="project"
         className="relative min-h-svh overflow-hidden bg-foreground pb-[20vh]"
       >
-        <div className="px-4 lg:px-16">
+        <div className="px-8 lg:px-16">
           <SectionDescribe title="selected works" />
         </div>
 

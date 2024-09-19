@@ -38,7 +38,7 @@ export default function SectionDescribe({ title }: { title: string }) {
       </div>
       <div
         ref={lineRef}
-        className="absolute -bottom-4 left-0 h-1 w-full origin-left rounded-full bg-white/60"
+        className="absolute -bottom-2 left-0 h-1 w-full origin-left rounded-full bg-white/60 lg:-bottom-4"
       ></div>
     </div>
   );

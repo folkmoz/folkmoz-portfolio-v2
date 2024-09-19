@@ -36,8 +36,6 @@ export default function Preloader({
     () => {
       if (!container.current || !nonhowkRef.current) return;
 
-      const isMobile = dimension.width < 768;
-
       const non = nonhowkRef.current;
 
       gsap.set(non, {
@@ -52,7 +50,7 @@ export default function Preloader({
         .timeline({
           delay: 1,
           onComplete: () => {
-            setIsLoading(false);
+            // setIsLoading(false);
             document.body.style.overflow = "auto";
           },
         })
@@ -139,10 +137,10 @@ export default function Preloader({
         <>
           <div
             ref={balloonRef}
-            className="absolute z-10 rounded-2xl bg-white p-2 font-body text-2xl font-bold opacity-0 md:p-4"
+            className="absolute z-10 rounded-2xl bg-white p-2 font-body text-xl font-bold opacity-0 md:p-4 md:text-2xl"
           >
             Hi There! 👋🏼
-            <div className="absolute left-[-3%] top-[75%] h-0 w-0 rotate-[30deg] transform border-l-[2vh] border-r-[2vh] border-t-[6vh] border-l-transparent border-r-transparent border-t-white"></div>
+            <div className="absolute left-[-3%] top-[75%] h-0 w-0 rotate-[30deg] transform border-r-[1vh] border-t-[4vh] border-l-transparent border-r-transparent border-t-white md:border-l-[2vh] md:border-r-[2vh] md:border-t-[6vh]"></div>
           </div>
           <div
             ref={nonhowkRef}

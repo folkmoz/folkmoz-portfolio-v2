@@ -13,7 +13,7 @@ export default function LegacyContact() {
         <div className="relative -top-[100vh] h-[calc(100svh+800px)] lg:h-[200svh]">
           <div className="sticky top-0 flex h-[800px] lg:h-[100svh]">
             <div className="h-[800px] w-full overflow-hidden bg-white px-4 pt-20 md:px-10 md:py-[5vh] lg:h-[100svh]">
-              <div className="flex h-full flex-col justify-center">
+              <div className="flex h-full flex-col justify-end lg:justify-center">
                 <div className="text-5xl font-bold md:text-8xl 2xl:text-9xl">
                   <h3 className="text-foreground">
                     <AnimatedText

@@ -94,20 +94,20 @@
 }
 
 @layer utilities {
-
-
     .strokeme {
         color: white;
         text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
         transition: all .2s ease-in-out;
     }
 
-    .strokeme:hover {
-        text-shadow: -10px 7px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
-        transform: translate(10px, -12px);
-    }
-
     .text-responsive {
         font-size: clamp(1rem, 5vw, 5rem);
+    }
+
+    @media (hover: none) and (pointer: coarse) {
+        .strokeme:hover {
+            text-shadow: -10px 7px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+            transform: translate(10px, -12px);
+        }
     }
 }

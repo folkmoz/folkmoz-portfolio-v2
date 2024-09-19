@@ -51,10 +51,14 @@ export default function AboutMe() {
         onEnter: () => anim.play(),
       });
 
+      if (isMobile) return;
+
       ScrollTrigger.create({
         trigger: aboutMeRef.current,
         start: "top bottom",
-        onLeaveBack: () => anim.pause(0),
+        onLeaveBack: () => {
+          anim.pause(0);
+        },
       });
     });
 
@@ -65,7 +69,7 @@ export default function AboutMe() {
         scrollTrigger: {
           trigger: profileImage,
           start: isMobile ? "top 80%" : "top-=700",
-          end: "top",
+          end: isMobile ? "top center" : "top",
           // toggleActions: "play none none none",
           once: isMobile,
           scrub: 1,
@@ -141,7 +145,7 @@ export default function AboutMe() {
       id="about-me"
       className="relative flex min-h-svh flex-col bg-foreground"
     >
-      <div className="px-4 md:px-8 lg:px-16">
+      <div className="px-8 md:px-8 lg:px-16">
         <SectionDescribe title="about me" />
 
         <div
@@ -155,8 +159,6 @@ export default function AboutMe() {
             <Image
               src="/images/me.jpg"
               alt={`${DATA.initials}'s avatar`}
-              // width={700}
-              // height={700}
               sizes={"(min-width: 1024px) 700px, 100vw"}
               quality={100}
               fill
@@ -214,23 +216,17 @@ export default function AboutMe() {
           </div>
           <div className="w-full xl:w-1/2">
             <ul className="list-inside list-disc text-lg md:mt-8 md:text-2xl">
-              <li>
-                <span>Listening to music</span>
-              </li>
-              <li>
-                <span>Playing games</span>
-              </li>
-              <li>
-                <span>Watching movies/series</span>
-              </li>
-              <li>
-                <span>
-                  Working out and trying to maintain a healthy lifestyle
-                </span>
-              </li>
-              <li>
-                <span>Exploring new technologies and learning new things</span>
-              </li>
+              <ListItem primary={"Listening to music"} />
+              <ListItem primary={"Playing games"} />
+              <ListItem primary={"Watching movies/series"} />
+              <ListItem
+                primary={
+                  "Working out and trying to maintain a healthy lifestyle"
+                }
+              />
+              <ListItem
+                primary={"Exploring new technologies and learning new things"}
+              />
             </ul>
           </div>
         </div>
@@ -249,29 +245,14 @@ export default function AboutMe() {
                 </h5>
               </div>
               <ul className="mt-2 list-inside list-disc text-lg text-gray-300 md:text-2xl">
-                <li>
-                  <span>React</span>
-                </li>
-                <li>
-                  <span>
-                    Next.js <i className="text-sm text-primary">+ Typescript</i>
-                  </span>
-                </li>
-                <li>
-                  <span>Tailwind CSS</span>
-                </li>
-
-                <li>
-                  <span>
-                    Animation{" "}
-                    <i className="text-sm text-primary">
-                      (GSAP, Framer Motion)
-                    </i>
-                  </span>
-                </li>
-                <li>
-                  <span>Vercel</span>
-                </li>
+                <ListItem primary={"React"} />
+                <ListItem primary={"Next.JS"} secondary={"+ Typescript"} />
+                <ListItem primary={"Tailwindcss"} />
+                <ListItem
+                  primary={"Animation"}
+                  secondary={"(GSAP, Framer Motion)"}
+                />
+                <ListItem primary={"Responsive design"} />
               </ul>
             </div>
 
@@ -282,26 +263,11 @@ export default function AboutMe() {
                 </h5>
               </div>
               <ul className="mt-2 list-inside list-disc text-lg md:text-2xl">
-                <li>
-                  <span>Git</span>
-                </li>
-                <li>
-                  <span>
-                    Docker <i className="text-sm text-primary">+ Compose</i>
-                  </span>
-                </li>
-                <li>
-                  <span>
-                    GitHub Actions{" "}
-                    <i className="text-sm text-primary">+ Workflows</i>
-                  </span>
-                </li>
-                <li>
-                  <span>
-                    Azure App Service{" "}
-                    <i className="text-sm text-primary">+ CI/CD</i>
-                  </span>
-                </li>
+                <ListItem primary={"Git"} secondary={"(GitHub, GitLab)"} />
+                <ListItem primary={"Docker"} secondary={"(Compose)"} />
+                <ListItem primary={"CI/CD"} secondary={"(GitHub Actions)"} />
+                <ListItem primary={"Azure DevOps"} />
+                <ListItem primary={"Vercel"} />
               </ul>
             </div>
           </div>
@@ -315,27 +281,14 @@ export default function AboutMe() {
           </div>
           <div className="xl:w-1/2">
             <ul className="list-inside list-disc text-lg md:mt-8 md:text-2xl">
-              <li>
-                <span>
-                  Webstorm <i className="text-sm text-primary">+ Vscode</i>
-                </span>
-              </li>
-              <li>
-                <span>
-                  Figma <i className="text-sm text-primary">(learning)</i>
-                </span>
-              </li>
-              <li>
-                <span>Notion</span>
-              </li>
-              <li>
-                <span>
-                  Postman <i className="text-sm text-primary">+ Apidog</i>
-                </span>
-              </li>
-              <li>
-                <span>ChatGPT</span>
-              </li>
+              <ListItem primary={"Webstorm"} secondary={"+ Vscode"} />
+              <ListItem primary={"Figma"} secondary={"(learning)"} />
+              <ListItem primary={"Notion"} />
+              <ListItem primary={"Postman"} secondary={"+ Apidog"} />
+              <ListItem
+                primary={"AI Tools"}
+                secondary={"(ChatGPT, Copilot, etc.)"}
+              />
             </ul>
           </div>
         </div>
@@ -348,6 +301,23 @@ export default function AboutMe() {
     </section>
   );
 }
+
+const ListItem = ({
+  primary,
+  secondary = "",
+}: {
+  primary: string;
+  secondary?: string;
+}) => {
+  return (
+    <li>
+      <span>
+        {primary}{" "}
+        {secondary && <i className="text-sm text-primary">{secondary}</i>}
+      </span>
+    </li>
+  );
+};
 
 const Heading = ({ text }: { text: string }) => {
   const containerRef = useRef<HTMLDivElement>(null);

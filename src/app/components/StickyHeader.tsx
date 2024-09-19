@@ -82,7 +82,7 @@ export default function StickyHeader() {
     };
 
     gsap.to(headerRef.current, {
-      height: isMobile ? 80 : 100,
+      height: isMobile ? 70 : 100,
       ease: "power4.inOut",
       scrollTrigger: trigger,
     });
@@ -116,7 +116,7 @@ export default function StickyHeader() {
         className="fixed left-0 right-0 top-0 z-20 h-[150px]"
       >
         <div className="absolute inset-0 backdrop-blur-lg lg:hidden"></div>
-        <header className="flex h-full w-full items-center justify-between px-3 py-4 md:px-4 lg:px-12">
+        <header className="flex h-full w-full items-center justify-between px-4 py-4 lg:px-12">
           <Link href="/" className="relative z-10 font-heading text-xl">
             <svg
               className="size-12"

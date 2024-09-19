@@ -2,10 +2,13 @@ import { useRef } from "react";
 import { ScrollIndicator } from "@/app/components/ScrollIndicator";
 import { useGSAP } from "@gsap/react";
 import { gsap } from "gsap";
+import useScreen from "@/app/hooks/useScreen";
 
 export default function HeroTest() {
   const container = useRef<HTMLDivElement>(null);
   const titleWrapperRef = useRef<HTMLDivElement>(null);
+
+  const { isMobile } = useScreen();
 
   const letterAnim = {
     textShadow:
@@ -19,22 +22,22 @@ export default function HeroTest() {
 
     if (titleLetters) {
       titleLetters.forEach((letter) => {
-        letter.addEventListener("mouseenter", () => {
-          gsap.to(letter, {
-            ...letterAnim,
-            duration: 0.01,
-          });
-        });
-
-        letter.addEventListener("mouseleave", () => {
-          gsap.to(letter, {
-            x: 0,
-            y: 0,
-            textShadow:
-              "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000",
-            duration: 0.01,
-          });
-        });
+        // letter.addEventListener("mouseenter", () => {
+        //   gsap.to(letter, {
+        //     ...letterAnim,
+        //     duration: 0.01,
+        //   });
+        // });
+        //
+        // letter.addEventListener("mouseleave", () => {
+        //   gsap.to(letter, {
+        //     x: 0,
+        //     y: 0,
+        //     textShadow:
+        //       "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000",
+        //     duration: 0.01,
+        //   });
+        // });
       });
 
       gsap.to(titleLetters, {
@@ -49,7 +52,7 @@ export default function HeroTest() {
         },
       });
     }
-  }, []);
+  }, [isMobile]);
 
   return (
     <>
