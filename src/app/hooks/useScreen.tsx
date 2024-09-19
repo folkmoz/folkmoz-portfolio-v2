@@ -24,7 +24,10 @@ export default function useScreen() {
     window.addEventListener("scroll", handleScroll);
     window.addEventListener("resize", handleResize);
 
-    handleResize();
+    setScreen({
+      width: window.innerWidth,
+      height: window.innerHeight,
+    });
 
     return () => {
       window.removeEventListener("resize", handleResize);

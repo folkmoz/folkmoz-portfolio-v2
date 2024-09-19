@@ -60,7 +60,6 @@ export default function AboutMe() {
 
     const profileImage = profileRef.current!.querySelector("img");
     // Profile animation
-
     gsap
       .timeline({
         scrollTrigger: {
