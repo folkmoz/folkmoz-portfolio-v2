@@ -24,7 +24,7 @@ gsap.registerPlugin(useGSAP);
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Page() {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const lenis = useLenis();
 
   const { isMobile } = useScreen();

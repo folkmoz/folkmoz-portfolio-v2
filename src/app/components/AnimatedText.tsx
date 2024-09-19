@@ -44,7 +44,7 @@ export default function AnimatedText({
         },
       });
     },
-    { scope: container, dependencies: [animate] },
+    { scope: container, dependencies: [animate, atViewport] },
   );
   return (
     <div className="relative flex flex-col" ref={container}>

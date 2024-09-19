@@ -51,12 +51,11 @@ export default function AboutMe() {
         onEnter: () => anim.play(),
       });
 
-      if (isMobile) return;
-
       ScrollTrigger.create({
         trigger: aboutMeRef.current,
         start: "top bottom",
         onLeaveBack: () => {
+          if (isMobile) return;
           anim.pause(0);
         },
       });
@@ -88,7 +87,7 @@ export default function AboutMe() {
           duration: 1,
         },
       );
-  }, []);
+  }, [isMobile]);
 
   const scrollToTarget = (target: HTMLElement, yOffset = 0) => {
     const y = target.getBoundingClientRect().top + window.scrollY + yOffset;
@@ -207,7 +206,7 @@ export default function AboutMe() {
         </div>
       </div>
 
-      <div className="flex h-full w-full flex-col gap-16 px-8 pb-20 pt-16 text-white md:gap-56 md:px-20 md:pt-[10vh] lg:pb-[50vh]">
+      <div className="flex h-full w-full flex-col gap-16 px-8 pb-20 pt-16 text-white md:gap-40 md:px-20 md:pt-[5vh] lg:pb-[50vh]">
         <div className="flex flex-col justify-between gap-6 xl:flex-row">
           <div className="text-5xl sm:text-6xl md:text-7xl 2xl:text-8xl">
             <h4 className="font-bold leading-[1.2]">
