@@ -53,7 +53,7 @@ export default function MagneticButton({
       xTo(0);
       yTo(0);
     });
-  }, []);
+  }, [isMobile]);
 
   return React.cloneElement(children, { ref: magnetic });
 }

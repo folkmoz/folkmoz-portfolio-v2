@@ -151,7 +151,7 @@ export default function AboutMe() {
         >
           <div
             ref={profileRef}
-            className="relative col-span-full h-[400px] w-full overflow-hidden rounded-[16px] lg:col-span-2 lg:h-[700px] lg:rounded-[24px]"
+            className="relative col-span-full h-[400px] w-full overflow-hidden rounded-[16px] md:h-[700px] lg:col-span-2 lg:rounded-[24px]"
           >
             <Image
               src="/images/me.jpg"
@@ -193,6 +193,7 @@ export default function AboutMe() {
                   words={["I'm fine ", ">thank you", ", sit down please"]}
                 />
 
+                <div className="my-8" />
                 <TextBody words={["CUM GPA: ", ">3.81", " (2023)"]} />
               </div>
 

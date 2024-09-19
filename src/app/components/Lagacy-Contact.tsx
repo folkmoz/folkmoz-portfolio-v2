@@ -7,12 +7,12 @@ export default function LegacyContact() {
   return (
     <>
       <section
-        className="relative z-10 h-[800px] bg-white lg:h-[90svh]"
+        className="relative z-10 h-[800px] bg-white lg:h-[100svh]"
         style={{ clipPath: "polygon(0% 0, 100% 0%, 100% 100%, 0 100%)" }}
       >
-        <div className="relative -top-[100vh] h-[calc(100svh+800px)] lg:h-[190svh]">
-          <div className="sticky top-0 flex h-[800px] lg:h-[90svh]">
-            <div className="h-[800px] w-full overflow-hidden bg-white px-4 pt-20 md:px-10 md:py-[5vh] lg:h-[90svh]">
+        <div className="relative -top-[100vh] h-[calc(100svh+800px)] lg:h-[200svh]">
+          <div className="sticky top-0 flex h-[800px] lg:h-[100svh]">
+            <div className="h-[800px] w-full overflow-hidden bg-white px-4 pt-20 md:px-10 md:py-[5vh] lg:h-[100svh]">
               <div className="flex h-full flex-col justify-center">
                 <div className="text-5xl font-bold md:text-8xl 2xl:text-9xl">
                   <h3 className="text-foreground">
