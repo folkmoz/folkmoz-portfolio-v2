@@ -50,7 +50,7 @@ export default function Preloader({
         .timeline({
           delay: 1,
           onComplete: () => {
-            // setIsLoading(false);
+            setIsLoading(false);
             document.body.style.overflow = "auto";
           },
         })
