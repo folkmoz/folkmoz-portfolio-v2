@@ -8,13 +8,13 @@ export default function LegacyContact() {
     <>
       <section
         id="contacts"
-        className="relative z-10 h-[800px] bg-white lg:h-[calc(100svh-80px)]"
+        className="relative z-10 h-[800px] bg-white md:h-[calc(100svh-80px)]"
         style={{ clipPath: "polygon(0% 0, 100% 0%, 100% 100%, 0 100%)" }}
       >
-        <div className="relative -top-[100vh] h-[calc(100svh+800px)] lg:h-[calc(200svh-80px)]">
-          <div className="sticky top-0 flex h-[800px] items-end lg:h-[100svh]">
-            <div className="flex h-[800px] w-full items-end overflow-hidden bg-white px-4 pt-20 md:px-10 md:py-[5vh] lg:h-[calc(100svh-80px)]">
-              <div className="flex h-full w-full flex-col justify-end lg:max-h-[80vh] lg:justify-center">
+        <div className="relative -top-[100vh] h-[calc(100svh+800px)] md:h-[calc(200svh-80px)]">
+          <div className="sticky top-0 flex h-[800px] items-end md:h-[100svh]">
+            <div className="flex h-[800px] w-full items-end overflow-hidden bg-white px-4 pt-20 md:h-[calc(100svh-80px)] md:px-10 md:py-[5vh]">
+              <div className="flex h-full w-full flex-col justify-end md:max-h-[80vh] lg:justify-center">
                 <div className="text-5xl font-bold md:text-8xl 2xl:text-9xl">
                   <h3 className="text-foreground">
                     <AnimatedText
