@@ -116,8 +116,6 @@ export default function Page() {
         ":scope > div:last-child",
       );
 
-      console.log(lastChild);
-
       gsap.to(lastChild!, {
         opacity: 0,
         duration: 1,
@@ -146,7 +144,6 @@ export default function Page() {
   };
 
   useEffect(() => {
-    // detect and update active section
     const handleScroll = () => {
       const scrollPosition = window.scrollY;
       const sectionPositions = sections.map((section) => {
@@ -239,7 +236,7 @@ export default function Page() {
                   key={index}
                   href={`#${section}`}
                   onClick={onLinkClick}
-                  className={cn("text-6xl font-bold lg:text-[10vw]", {
+                  className={cn("text-[16vw] font-bold lg:text-[10vw]", {
                     italic: activeSection === section,
                     "opacity-20": activeSection !== section,
                   })}
