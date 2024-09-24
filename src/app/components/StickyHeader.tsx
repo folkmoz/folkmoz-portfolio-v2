@@ -1,17 +1,26 @@
-import React, { use, useEffect } from "react";
+import React, { Dispatch, SetStateAction, use, useEffect } from "react";
 import Link from "next/link";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import useScreen from "@/app/hooks/useScreen";
 import { cn } from "@/lib/utils";
 import MagneticButton from "@/app/components/MagneticButton";
+import { useLenis } from "lenis/react";
 
-const sections = ["home", "works", "about me", "contacts"];
+export const sections = ["home", "works", "about me", "contacts"];
 
-export default function StickyHeader() {
+export default function StickyHeader({
+  openMenu,
+  onLinkClick,
+}: {
+  openMenu: () => void;
+  onLinkClick: (e: React.MouseEvent<HTMLAnchorElement>) => void;
+}) {
   const headerRef = React.useRef<HTMLDivElement>(null);
   const LogoPathRef = React.useRef<SVGPathElement>(null);
   const navLinksWrapperRef = React.useRef<HTMLDivElement>(null);
+
+  const lenis = useLenis();
 
   const { screen } = useScreen();
 
@@ -139,7 +148,12 @@ export default function StickyHeader() {
               className="relative z-10 hidden font-body font-bold lg:flex"
             >
               {sections.map((section) => (
-                <Link key={section + "-link"} href={`#${section}`} className="">
+                <Link
+                  key={section + "-link"}
+                  href={`#${section}`}
+                  passHref
+                  onClick={onLinkClick}
+                >
                   <MagneticButton>
                     <div className="px-4 py-2 text-2xl decoration-wavy hover:underline xl:text-2xl">
                       {section}
@@ -150,7 +164,7 @@ export default function StickyHeader() {
             </div>
 
             <div className="absolute inset-0 flex items-center justify-end">
-              <MenuMobile />
+              <MenuMobile openMenu={openMenu} />
             </div>
           </div>
         </header>
@@ -159,10 +173,23 @@ export default function StickyHeader() {
   );
 }
 
-const MenuMobile = () => {
+const MenuMobile = ({ openMenu }: { openMenu: () => void }) => {
+  const onClick = () => {
+    gsap.to("#mobile-menu", {
+      scale: 0,
+      opacity: 0,
+      duration: 0.5,
+      ease: "power4.inOut",
+      onStart: () => {
+        openMenu();
+      },
+    });
+  };
+
   return (
     <MagneticButton>
       <div
+        onClick={onClick}
         id="mobile-menu"
         className="cursor-pointer space-y-1 p-2 md:p-4 lg:opacity-0"
       >

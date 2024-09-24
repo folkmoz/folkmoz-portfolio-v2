@@ -275,7 +275,7 @@ export default function ProjectDesktop() {
   return (
     <>
       <section
-        id="project"
+        id="works"
         className="relative min-h-svh overflow-hidden bg-foreground pb-[20vh]"
       >
         <div className="px-8 lg:px-16">
@@ -366,7 +366,7 @@ export default function ProjectDesktop() {
                   alt={`${project.title}'s image`}
                   fill
                   quality={100}
-                  priority
+                  priority={true}
                   className="w-full max-w-full"
                 />
               </div>

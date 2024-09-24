@@ -52,12 +52,35 @@ export default function HeroTest() {
         },
       });
     }
+
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: "#introduce",
+        start: "top 80%",
+        end: "top 10%",
+        scrub: true,
+      },
+    });
+
+    tl.to(container.current, {
+      opacity: 0,
+      duration: 1,
+      ease: "expo.inOut",
+    }).to(
+      titleWrapperRef.current,
+      {
+        y: -100,
+        duration: 1,
+        ease: "expo.inOut",
+      },
+      "<",
+    );
   }, [isMobile]);
 
   return (
     <>
       <section
-        id="hero"
+        id="home"
         ref={container}
         className="sticky top-0 grid min-h-[calc(100svh-50px)] place-items-center bg-[#f5f8fa]"
       >

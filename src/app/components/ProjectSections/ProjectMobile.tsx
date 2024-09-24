@@ -25,7 +25,12 @@ const ProjectCard = ({ project }: { project: Project }) => {
   return (
     <div className="flex flex-col items-center justify-center overflow-hidden rounded-[12px] bg-[#1a1a1a] shadow-lg">
       <div className="relative aspect-video w-full overflow-hidden">
-        <Image fill src={project.image} alt={`${project.title} image`} />
+        <Image
+          fill
+          src={project.image}
+          alt={`${project.title} image`}
+          priority={true}
+        />
       </div>
 
       <div className="mt-4 px-4 pb-10">
