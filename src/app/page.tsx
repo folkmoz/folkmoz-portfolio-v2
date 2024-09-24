@@ -223,7 +223,7 @@ export default function Page() {
                   className={cn("h-full bg-white")}
                 ></div>
               ))}
-            <div className="absolute left-0 top-0 flex h-full w-full flex-col items-center justify-center gap-4 p-4 text-center opacity-0 lg:items-start lg:gap-16 lg:p-16 lg:text-left">
+            <div className="absolute left-0 top-0 flex h-full w-full flex-col items-center justify-center gap-4 p-4 text-center opacity-0 lg:items-start lg:gap-16 lg:p-16 lg:text-left xl:gap-20">
               <div className="absolute right-6 top-6 cursor-pointer transition-all duration-200 ease-in-out hover:rotate-90 lg:right-24 lg:top-14">
                 <X
                   size={isMobile ? 24 : 48}
@@ -236,10 +236,13 @@ export default function Page() {
                   key={index}
                   href={`#${section}`}
                   onClick={onLinkClick}
-                  className={cn("text-[16vw] font-bold lg:text-[10vw]", {
-                    italic: activeSection === section,
-                    "opacity-20": activeSection !== section,
-                  })}
+                  className={cn(
+                    "text-[16vw] font-bold lg:text-[10vw] xl:text-9xl",
+                    {
+                      italic: activeSection === section,
+                      "opacity-20": activeSection !== section,
+                    },
+                  )}
                 >
                   <div>{section}</div>
                 </a>

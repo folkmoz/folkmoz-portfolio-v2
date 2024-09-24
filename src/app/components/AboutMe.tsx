@@ -69,8 +69,8 @@ export default function AboutMe() {
           trigger: profileImage,
           start: isMobile ? "top 80%" : "top-=700",
           end: isMobile ? "top center" : "top",
-          // toggleActions: "play none none none",
-          once: isMobile,
+          toggleActions: "play none none none",
+          once: true,
           scrub: 1,
         },
       })
