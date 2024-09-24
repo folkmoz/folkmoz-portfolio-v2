@@ -38,14 +38,14 @@ export default function Page() {
     if (target !== "#home" && target !== "#contacts") {
       const targetY =
         targetSection!.getBoundingClientRect().top + window.scrollY;
-      lenis!.scrollTo(targetY, { duration: 3 });
+      lenis!.scrollTo(targetY, { duration: 2 });
     } else {
       if (target === "#home") {
-        lenis!.scrollTo(0, { duration: 3 });
+        lenis!.scrollTo(0, { duration: 2 });
       }
 
       if (target === "#contacts") {
-        lenis!.scrollTo(document.body.scrollHeight, { duration: 3 });
+        lenis!.scrollTo(document.body.scrollHeight, { duration: 2 });
       }
     }
 
@@ -205,13 +205,18 @@ export default function Page() {
             hidden: !isOpenMenu,
           })}
         >
-          <div ref={modalMenuRef} className="flex h-full w-full -space-x-1">
+          <div
+            ref={modalMenuRef}
+            className="mr-[-17px] flex h-full w-full -space-x-1"
+          >
             {screen.width > 0 &&
               repeat(isMobile ? 3 : 6).map((index) => (
                 <div
                   data-index={index}
                   style={{
-                    width: Math.ceil(screen.width / (isMobile ? 3 : 6)) + "px",
+                    width:
+                      Math.ceil((screen.width + 17) / (isMobile ? 3 : 6)) +
+                      "px",
                     clipPath:
                       index % 2 === 0
                         ? "inset(0% 0% 100% 0%)"
@@ -221,7 +226,7 @@ export default function Page() {
                   className={cn("h-full bg-white")}
                 ></div>
               ))}
-            <div className="absolute left-0 top-0 flex h-full w-full flex-col items-center justify-center gap-4 p-4 text-center opacity-0 lg:grid lg:justify-items-start lg:gap-0 lg:p-16 lg:text-left">
+            <div className="absolute left-0 top-0 flex h-full w-full flex-col items-center justify-center gap-4 p-4 text-center opacity-0 lg:items-start lg:gap-16 lg:p-16 lg:text-left">
               <div className="absolute right-6 top-6 cursor-pointer transition-all duration-200 ease-in-out hover:rotate-90 lg:right-24 lg:top-14">
                 <X
                   size={isMobile ? 24 : 48}
@@ -236,7 +241,7 @@ export default function Page() {
                   onClick={onLinkClick}
                   className={cn("text-6xl font-bold lg:text-[10vw]", {
                     italic: activeSection === section,
-                    "opacity-50": activeSection !== section,
+                    "opacity-20": activeSection !== section,
                   })}
                 >
                   <div>{section}</div>
