@@ -8,7 +8,7 @@ export default function useScreen() {
 
   const [scrollY, setScrollY] = useState(0);
 
-  const isMobile = screen.width < 768;
+  const isMobile = screen.width > 0 ? screen.width < 768 : false;
 
   const handleResize = () => {
     setScreen({

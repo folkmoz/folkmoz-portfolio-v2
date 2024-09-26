@@ -193,6 +193,7 @@ export default function Page() {
         <HeroTest />
         <Introduce />
         {isMobile ? <ProjectMobile /> : <ProjectDesktop />}
+        {/*<ProjectDesktop />*/}
         <AboutMe />
         <LegacyContact />
         <NoiseFilterSVG />

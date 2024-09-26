@@ -36,12 +36,6 @@ export default function AboutMe() {
       const anim = gsap.from(lines, {
         yPercent: 100,
         stagger: 0.05,
-        // scrollTrigger: {
-        //   trigger: aboutMeRef.current,
-        //   start: "top 80%",
-        // toggleActions: "play complete reverse reset",
-        // once: true,
-        // },
         paused: true,
       });
 
@@ -51,14 +45,16 @@ export default function AboutMe() {
         onEnter: () => anim.play(),
       });
 
-      ScrollTrigger.create({
-        trigger: aboutMeRef.current,
-        start: "top bottom",
-        onLeaveBack: () => {
-          if (isMobile) return;
-          anim.pause(0);
-        },
-      });
+      // # to repeat the animation
+
+      // ScrollTrigger.create({
+      //   trigger: aboutMeRef.current,
+      //   start: "top bottom",
+      //   onLeaveBack: () => {
+      //     if (isMobile) return;
+      //     anim.pause(0);
+      //   },
+      // });
     });
 
     const profileImage = profileRef.current!.querySelector("img");
