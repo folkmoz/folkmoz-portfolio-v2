@@ -68,11 +68,13 @@ export default function HeroTest() {
       ease: "expo.inOut",
     }).to(
       titleWrapperRef.current,
-      {
-        y: -100,
-        duration: 1,
-        ease: "expo.inOut",
-      },
+      isMobile
+        ? {}
+        : {
+            y: -100,
+            duration: 1,
+            ease: "expo.inOut",
+          },
       "<",
     );
   }, [isMobile]);

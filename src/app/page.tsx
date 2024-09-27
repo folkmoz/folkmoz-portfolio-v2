@@ -18,7 +18,6 @@ import useScreen from "@/app/hooks/useScreen";
 import ProjectMobile from "@/app/components/ProjectSections/ProjectMobile";
 import { cn, repeat, sleep } from "@/lib/utils";
 import { X } from "lucide-react";
-import AnimatedText from "@/app/components/AnimatedText";
 
 gsap.registerPlugin(useGSAP);
 gsap.registerPlugin(ScrollTrigger);
@@ -146,12 +145,20 @@ export default function Page() {
   useEffect(() => {
     const handleScroll = () => {
       const scrollPosition = window.scrollY;
-      const sectionPositions = sections.map((section) => {
+      const pageHeight = document.body.scrollHeight;
+      const sectionPositions = sections.map((section, index) => {
         const sectionElement = document.getElementById(
           section.replace(" ", "-"),
         );
-        return sectionElement ? sectionElement.offsetTop - 100 : 0;
+
+        if (!sectionElement || index === 0) return 0;
+
+        return index !== sections.length - 1
+          ? sectionElement.offsetTop - 100
+          : pageHeight - sectionElement.offsetHeight * 2;
       });
+
+      sectionPositions.push(pageHeight);
 
       for (let i = 0; i < sectionPositions.length; i++) {
         if (
@@ -170,6 +177,10 @@ export default function Page() {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  useEffect(() => {
+    window.location.hash = activeSection.replace(" ", "-");
+  }, [activeSection]);
 
   useEffect(() => {
     ScrollTrigger.clearScrollMemory("manual");
@@ -193,7 +204,6 @@ export default function Page() {
         <HeroTest />
         <Introduce />
         {isMobile ? <ProjectMobile /> : <ProjectDesktop />}
-        {/*<ProjectDesktop />*/}
         <AboutMe />
         <LegacyContact />
         <NoiseFilterSVG />

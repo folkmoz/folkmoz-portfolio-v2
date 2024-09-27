@@ -16,12 +16,7 @@ export default function LegacyContact() {
             <div className="flex h-[800px] w-full items-end overflow-hidden bg-white px-4 pt-20 md:h-[calc(100svh-80px)] md:px-10 md:py-[5vh]">
               <div className="flex h-full w-full flex-col justify-end md:max-h-[80vh] lg:justify-center">
                 <div className="text-5xl font-bold md:text-8xl 2xl:text-9xl">
-                  <h3 className="text-foreground">
-                    <AnimatedText
-                      words={["Contacts."]}
-                      atViewport="start 80%"
-                    />
-                  </h3>
+                  <h3 className="text-foreground">Contacts</h3>
                 </div>
                 <div className="mt-8 flex flex-col divide-y-2 divide-foreground border-y-2 border-foreground md:flex-1">
                   <ContactItem
