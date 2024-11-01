@@ -5,6 +5,7 @@ import localFont from "next/font/local";
 import { DATA } from "@/data/resume";
 import { cn } from "@/lib/utils";
 import TailwindcssIndicator from "./components/TailwindcssIndicator";
+import { Analytics } from "@vercel/analytics/react";
 
 const fontBody = localFont({
   src: [
@@ -62,6 +63,7 @@ export default function RootLayout({
       >
         {children}
         <TailwindcssIndicator />
+        <Analytics />
         <div id="portal-root"></div>
       </body>
     </html>
