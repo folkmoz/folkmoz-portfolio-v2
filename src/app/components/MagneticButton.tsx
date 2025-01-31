@@ -6,7 +6,7 @@ import useScreen from "@/app/hooks/useScreen";
 export default function MagneticButton({
   children,
 }: {
-  children: React.ReactElement;
+  children: React.ReactElement<any>;
 }) {
   const magnetic = useRef<HTMLDivElement>(null);
   const { isMobile } = useScreen();

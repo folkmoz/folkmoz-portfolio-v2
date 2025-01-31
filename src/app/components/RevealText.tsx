@@ -6,7 +6,7 @@ import { SplitText } from "../helpers/gsapSplitText";
 export default function RevealText({
   children,
 }: {
-  children: React.ReactElement;
+  children: React.ReactElement<any>;
 }) {
   const textWrapperRef = useRef<HTMLDivElement>(null);
 

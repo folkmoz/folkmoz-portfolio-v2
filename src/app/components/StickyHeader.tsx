@@ -20,8 +20,6 @@ export default function StickyHeader({
   const LogoPathRef = React.useRef<SVGPathElement>(null);
   const navLinksWrapperRef = React.useRef<HTMLDivElement>(null);
 
-  const lenis = useLenis();
-
   const { screen } = useScreen();
 
   const isMobile = screen.width < 1024;

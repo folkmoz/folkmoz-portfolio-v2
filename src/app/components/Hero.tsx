@@ -2,7 +2,7 @@
 
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
-import { useRef, useEffect } from "react";
+import { useRef } from "react";
 import { ScrollIndicator } from "@/app/components/ScrollIndicator";
 
 export default function Hero({ isFinishLoading = false }) {

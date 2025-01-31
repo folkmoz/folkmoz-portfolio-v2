@@ -7,8 +7,8 @@ import React, { useRef, useState, useEffect } from "react";
 export default function Cursor() {
   const [isHovering, setIsHovering] = useState(false);
   const [hoverOn, setHoverOn] = useState<string | null>(null);
-  const xTo = useRef<gsap.QuickToFunc>();
-  const yTo = useRef<gsap.QuickToFunc>();
+  const xTo = useRef<gsap.QuickToFunc>(undefined);
+  const yTo = useRef<gsap.QuickToFunc>(undefined);
   const cursor = useRef<HTMLDivElement | null>(null);
   const cursorProject = useRef<SVGSVGElement | null>(null);
 
