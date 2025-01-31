@@ -10,8 +10,6 @@ import useScreen from "@/app/hooks/useScreen";
 import AnimatedText from "@/app/components/AnimatedText";
 
 export default function AboutMe() {
-  const [isButtonClicked, setIsButtonClicked] = useState(false);
-
   const pinnedRef = useRef<HTMLDivElement>(null);
   const profileRef = useRef<HTMLDivElement>(null);
   const aboutMeRef = useRef<HTMLDivElement>(null);
@@ -84,56 +82,6 @@ export default function AboutMe() {
         },
       );
   }, [isMobile]);
-
-  const scrollToTarget = (target: HTMLElement, yOffset = 0) => {
-    const y = target.getBoundingClientRect().top + window.scrollY + yOffset;
-    window.scrollTo({ top: y, behavior: "auto" });
-  };
-
-  useEffect(() => {
-    if (isButtonClicked && !isMobile) {
-      gsap.set(whitespaceRef.current, {
-        height: "200vh",
-      });
-
-      scrollToTarget(pinnedRef.current!);
-
-      ScrollTrigger.create({
-        trigger: pinnedRef.current,
-        start: "top top",
-        end: "bottom bottom",
-        endTrigger: whitespaceRef.current,
-        pin: true,
-        pinSpacing: false,
-      });
-    } else {
-      gsap.set(whitespaceRef.current, {
-        height: 0,
-      });
-      ScrollTrigger.getAll().forEach((trigger) => {
-        if (trigger.vars.endTrigger === whitespaceRef.current) {
-          trigger.kill();
-
-          scrollToTarget(pinnedRef.current!, 100);
-        }
-      });
-    }
-  }, [isButtonClicked]);
-
-  const handleButtonClick = () => {
-    const button = buttonWrapperRef.current!.querySelector("button");
-
-    if (!button) return;
-
-    gsap.to(button, {
-      scale: 0,
-      opacity: 0,
-      duration: 0.5,
-      onComplete: () => {
-        setIsButtonClicked(true);
-      },
-    });
-  };
 
   return (
     <section
@@ -364,7 +312,7 @@ const Heading = ({ text }: { text: string }) => {
   );
 };
 
-const TextBody = ({ words }: { words: string[] }) => {
+const TextBody = React.memo(({ words }: { words: string[] }) => {
   return (
     <div className="w-full overflow-hidden">
       <div className="leading-normal">
@@ -378,7 +326,9 @@ const TextBody = ({ words }: { words: string[] }) => {
       </div>
     </div>
   );
-};
+});
+
+TextBody.displayName = "TextBody";
 
 const TextHighlight = ({ text }: { text: string }) => {
   return (

@@ -14,10 +14,12 @@ import ProjectDetail from "@/app/components/ProjectSections/ProjectDetail";
 gsap.registerPlugin(Flip);
 
 export default function ProjectDesktop() {
-  const [disableCursor, setDisableCursor] = useState(true);
+  // const [disableCursor, setDisableCursor] = useState(true);
   const [isEntered, setIsEntered] = useState(false);
   const [isViewed, setIsViewed] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
+
+  const disableCursor = useRef(false);
 
   const pinned = useRef<HTMLDivElement>(null);
   const imagesRef = useRef<HTMLDivElement>(null);
@@ -346,8 +348,16 @@ export default function ProjectDesktop() {
           <div
             onMouseMove={onMouseMove}
             onClick={onProjectClick}
-            onMouseLeave={() => setDisableCursor(true)}
-            onMouseEnter={() => setDisableCursor(false)}
+            onMouseLeave={() => {
+              if (isEntered && !isViewed) {
+                disableCursor.current = false;
+              }
+            }}
+            onMouseEnter={() => {
+              if (isEntered && !isViewed) {
+                disableCursor.current = true;
+              }
+            }}
             ref={imagesRef}
             data-cursor="project"
             className="absolute inset-0 mx-auto grid w-full max-w-screen-2xl grid-cols-1 place-items-center gap-y-20"

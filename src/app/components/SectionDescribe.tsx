@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 
-export default function SectionDescribe({ title }: { title: string }) {
+function SectionDescribe({ title }: { title: string }) {
   let lineRef = useRef(null);
   let titleRef = useRef(null);
 
@@ -43,3 +43,5 @@ export default function SectionDescribe({ title }: { title: string }) {
     </div>
   );
 }
+
+export default React.memo(SectionDescribe);
